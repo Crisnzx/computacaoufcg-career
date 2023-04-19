@@ -1,0 +1,9 @@
+# Ignores executable binary files
+*
+!/**/
+!*.*
+
+# Files other than binary that ghc generates
+
+*.o
+*.hi
