@@ -1,0 +1,7 @@
+{
+  "battlefield": { "width": "84", "height": "47" },
+  "card": { "width": "8", "height": "8" },
+  "character": { "width": "21", "height": "24" },
+  "healthBar": { "width": "30", "height": "7" },
+  "number": { "width": "3", "height": "2" }
+}
