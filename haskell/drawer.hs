@@ -1,9 +1,9 @@
-module Drawer (makeLines, makeSpaces) where
+module Drawer (makeHealthBarLines, makeCharacterLines, makeCharLines, makeCardLines, makeSpaces) where
 import Sprites
 
 makeHealthBarLines:: [Int] -> String -> [String]
 makeHealthBarLines dataList spacer =
-    let sprites = map (\character -> getCharacterSprite character) dataList
+    let sprites = map (\character -> getHealthBarSprite character) dataList
     in (concatLines (map (\sprite -> lines sprite) sprites) 0 spacer)
 
 makeCharacterLines:: [String] -> String -> [String]
@@ -21,10 +21,13 @@ makeCardLines dataList spacer =
     let sprites = map (\cardNumber -> getCardSprite cardNumber) dataList
     in concatLines (map (\sprite -> lines sprite) sprites) 0 spacer
 
+makeGenericLines:: [String] -> String -> [String]
+makeGenericLines sprites spacer = (concatLines (map (\sprite -> lines sprite) sprites) 0 spacer)
+
 
 makeSpaces:: Int -> String
 makeSpaces 0 = ""
-makeSpaces n = " " ++ makeSpaces n-1
+makeSpaces n = " " ++ makeSpaces (n-1)
 
 
 concatLines:: [[String]] -> Int -> String -> [String]

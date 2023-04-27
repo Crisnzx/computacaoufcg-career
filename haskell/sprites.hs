@@ -1,4 +1,4 @@
-module Sprites (getCardSprite, getCharSprite, getCharacterSprite) where
+module Sprites (getHealthBarSprite, getCharacterSprite, getCardSprite, getCharSprite) where
 
 getHealthBarSprite:: Int -> String
 getHealthBarSprite life = unlines [
