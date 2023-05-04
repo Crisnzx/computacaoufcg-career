@@ -3,8 +3,8 @@ import Drawer
 
 main:: IO()
 main = do
-  mapM_ putStr (makeText "prepare se a batalha esta pr")
-  -- mapM_ putStr (makeBattlefield 40 25 "edaBoss" [2, 3, 9, 5, 6] [0, 0])
+  mapM_ putStr (makeText "prepare-se. o sapato eh amalero!?")
+  mapM_ putStr (makeBattlefield 97 4 "plpBoss" [2, 13, 9, 1, 6] [13, 9])
 
 
 -- corrigir as sprites de numero
