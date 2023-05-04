@@ -9,6 +9,7 @@ main = do
   mapM_ putStr (makeCharacterLines ["mainCharacter", "edaBoss"] (makeSpaces 56))
   mapM_ putStr (makeCardLines [2,3,4,5,6] (makeSpaces 3))
   print ""
-  mapM_ putStr (makeCharLines "prepare se a batalha esta pr" (makeSpaces 1))
+  mapM_ putStr (makeTextLines "prepare se a batalha esta pr" (makeSpaces 1))
   print ""
-  mapM_ putStr (makeCharLines "estes a comecar" (makeSpaces 1))
+  mapM_ putStr (makeTextLines "estes a comecar" (makeSpaces 1))
+  mapM_ putStr (makeHealthBarLines [52, 10] (makeSpaces 15))

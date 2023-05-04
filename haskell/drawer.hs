@@ -1,9 +1,9 @@
-module Drawer (makeHealthBarLines, makeCharacterLines, makeCharLines, makeCardLines, makeSpaces) where
+module Drawer (makeHealthBarLines, makeCharacterLines, makeTextLines, makeCardLines, makeSpaces) where
 import Sprites
 
 makeHealthBarLines:: [Int] -> String -> [String]
 makeHealthBarLines dataList spacer =
-    let sprites = map (\character -> getHealthBarSprite character) dataList
+    let sprites = map (\lifeNumber -> getHealthBarSprite lifeNumber) dataList
     in (concatLines (map (\sprite -> lines sprite) sprites) 0 spacer)
 
 makeCharacterLines:: [String] -> String -> [String]
@@ -11,8 +11,8 @@ makeCharacterLines dataList spacer =
     let sprites = map (\character -> getCharacterSprite character) dataList
     in (concatLines (map (\sprite -> lines sprite) sprites) 0 spacer)
 
-makeCharLines:: [Char] -> String -> [String]
-makeCharLines dataList spacer =
+makeTextLines:: [Char] -> String -> [String]
+makeTextLines dataList spacer =
     let sprites = map (\char -> getCharSprite char) dataList
     in (concatLines (map (\sprite -> lines sprite) sprites) 0 spacer)
 
@@ -38,3 +38,13 @@ concatLines sprites lineNumber spacer
 concatLine:: [[String]] -> Int -> String -> String
 concatLine (h: []) lineNumber spacer = h !! lineNumber ++ "\n"
 concatLine (h: t) lineNumber spacer = h !! lineNumber ++ spacer ++ concatLine t lineNumber spacer
+
+
+
+
+
+-- receives the battle params and returns the list of strings that will be printed
+-- makeBattlefield:: [Int] -> String -> Int -> Int -> [String]
+-- makeBattlefield cards boss playerLife bossLife = do
+--     let cardLines = makeCardLines cards (makeSpaces 2)
+--     let 

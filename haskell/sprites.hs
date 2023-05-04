@@ -1,15 +1,30 @@
 module Sprites (getHealthBarSprite, getCharacterSprite, getCardSprite, getCharSprite) where
 
 getHealthBarSprite:: Int -> String
-getHealthBarSprite life = unlines [
-  "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█▀▀█░░█▀▀█░░█▀▀█░░",
-  "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█▄▄█░░█▄▄█░░█▄▄█░░",
-  "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▄▄▄█░░▄▄▄█░░▄▄▄█░░",
-  "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░",
-  "░░████████████████████████████████████████████████████████░░",
-  "██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░██",
-  "░░████████████████████████████████████████████████████████░░"
-  ]
+-- getHealthBarSprite life = unlines [
+--   "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█▀▀█░░█▀▀█░░█▀▀█░░",
+--   "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█▄▄█░░█▄▄█░░█▄▄█░░",
+--   "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▄▄▄█░░▄▄▄█░░▄▄▄█░░",
+--   "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░",
+
+
+
+--   "░░████████████████████████████████████████████████████████░░",
+--   "██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░██",
+--   "░░████████████████████████████████████████████████████████░░"
+--   ]
+
+-- getHealthBarSprite life = do
+--   let lifeNumberSprite = makeTextLines ("#####" ++ show life) "#"
+--   return (unlines lifeNumberSprite)
+
+getHealthBarSprite life = unlines (makeTextLines ("#####" ++ show life ++ "##") "░░")
+
+-- regra de 3
+-- vida       - 100
+-- pixelsVida - 28
+-- pixelsVida vai ser ate qual indice a lista vai ser preenchida com ▓▓, e o resto vai ser com ░░
+
 
 getCharacterSprite:: String -> String
 getCharacterSprite "mainCharacter" = unlines [
@@ -189,11 +204,6 @@ getCardSprite 13 = unlines [
   ]
 
 getCharSprite:: Char -> String
-getCharSprite '8' = unlines [
-  "█▀▀█",
-  "█■■█",
-  "█▄▄█"
-  ]
 getCharSprite 'a' = unlines [
   "█▀▀█",
   "█■■█",
@@ -327,8 +337,95 @@ getCharSprite 'z' = unlines [
   "█▄▄▄"
   ]
 
+getCharSprite '0' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
+getCharSprite '1' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
+getCharSprite '2' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
+getCharSprite '3' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
+getCharSprite '4' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
+getCharSprite '5' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
+getCharSprite '6' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
+getCharSprite '7' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
+getCharSprite '8' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
+getCharSprite '9' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
 getCharSprite ' ' = unlines [
   "    ",
   "    ",
   "    "
   ]
+
+getCharSprite '#' = unlines [
+  "░░░░",
+  "░░░░",
+  "░░░░"
+  ]
+
+getCharSprite char = unlines [
+  "░░░░",
+  "░░░░",
+  "░░░░"
+  ]
+
+
+makeTextLines:: [Char] -> String -> [String]
+makeTextLines dataList spacer =
+    let sprites = map (\char -> getCharSprite char) dataList
+    in (concatLines (map (\sprite -> lines sprite) sprites) 0 spacer)
+
+concatLines:: [[String]] -> Int -> String -> [String]
+concatLines sprites lineNumber spacer
+  | lineNumber < length (sprites !! 0) = [concatLine sprites lineNumber spacer] ++ concatLines sprites (lineNumber+1) spacer
+  | otherwise = []
+
+concatLine:: [[String]] -> Int -> String -> String
+concatLine (h: []) lineNumber spacer = h !! lineNumber
+concatLine (h: t) lineNumber spacer = h !! lineNumber ++ spacer ++ concatLine t lineNumber spacer
