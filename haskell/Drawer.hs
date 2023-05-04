@@ -44,7 +44,7 @@ concatLine (h: t) lineNumber spacer = h !! lineNumber ++ spacer ++ concatLine t 
 makeBattlefield:: Int -> Int -> String -> [Int] -> [Int] -> [String]
 makeBattlefield playerLife bossLife boss playerCards currentCards =
   [cycleChar "░░" 98 ++ "\n"] ++
-  makeHealthBarLines [playerLife, bossLife] (cycleChar "░░" 34) ++
+  makeHealthBarLines [playerLife, bossLife] (cycleChar "░░" 22) ++
   [cycleChar "░░" 98 ++ "\n"] ++
   makeCharacterLines ["mainCharacter", boss] (cycleChar "░░" 56) ++
   [cycleChar "░░" 98 ++ "\n"] ++

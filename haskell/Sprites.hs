@@ -17,12 +17,12 @@ getHealthBarSprite:: Int -> String
 
 getHealthBarSprite life = unlines (
   makeHealthBarValue life
-  ++ ["░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"]
+  ++ ["░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"]
   ++ makeHealthBarMeter life
   )
 
 makeHealthBarValue:: Int -> [String]
-makeHealthBarValue life = makeTextLines ("#######" ++ (padStart life) ++ "#") "░░"
+makeHealthBarValue life = makeTextLines ("########" ++ (padStart life) ++ "##") "░░"
 
 padStart:: Int -> String
 padStart life = drop (length (prepareLifeValue life) - 3) (prepareLifeValue life)
@@ -32,9 +32,9 @@ prepareLifeValue life = "##" ++ show life
 
 makeHealthBarMeter:: Int -> [String]
 makeHealthBarMeter life = [
-  "░░████████████████████████████████████████████████████████████░░",
-  "██" ++ fillHealthBar (round ((fromIntegral life) * 0.3)) ++  "██",
-  "░░████████████████████████████████████████████████████████████░░"
+  "░░░░░░░░████████████████████████████████████████████████████████████░░░░░░░░",
+  "░░░░░░██" ++ fillHealthBar (round ((fromIntegral life) * 0.3)) ++  "██░░░░░░",
+  "░░░░░░░░████████████████████████████████████████████████████████████░░░░░░░░"
   ]
 
 fillHealthBar:: Int -> String
