@@ -43,13 +43,13 @@ concatLine (h: t) lineNumber spacer = h !! lineNumber ++ spacer ++ concatLine t 
 -- receives the battle params and returns the list of strings that will be printed
 makeBattlefield:: Int -> Int -> String -> [Int] -> [Int] -> [String]
 makeBattlefield playerLife bossLife boss playerCards currentCards =
-  [cycleChar "░░" 84 ++ "\n"] ++
-  makeHealthBarLines [playerLife, bossLife] (cycleChar "░░" 10) ++
-  [cycleChar "░░" 84 ++ "\n"] ++
-  makeCharacterLines ["mainCharacter", boss] (cycleChar "░░" 32) ++
-  [cycleChar "░░" 84 ++ "\n"] ++
-  ["░░" ++ cycleChar "██" 84 ++ "░░" ++ "\n"] ++
-  ["██" ++ cycleChar "░░" 58 ++ "██" ++ (cycleChar "░░" 25) ++ "██" ++ "\n"] ++
-  makeCardLines playerCards currentCards (cycleChar "░░" 3) ++
-  ["██" ++ cycleChar "░░" 58 ++ "██" ++ (cycleChar "░░" 25) ++ "██" ++ "\n"] ++
-  ["░░" ++ cycleChar "██" 84 ++ "░░" ++ "\n"]
+  [cycleChar "░░" 98 ++ "\n"] ++
+  makeHealthBarLines [playerLife, bossLife] (cycleChar "░░" 34) ++
+  [cycleChar "░░" 98 ++ "\n"] ++
+  makeCharacterLines ["mainCharacter", boss] (cycleChar "░░" 56) ++
+  [cycleChar "░░" 98 ++ "\n"] ++
+  ["░░" ++ cycleChar "██" 96 ++ "░░" ++ "\n"] ++
+  ["██" ++ cycleChar "░░" 67 ++ "██" ++ (cycleChar "░░" 28) ++ "██" ++ "\n"] ++
+  makeCardLines playerCards currentCards (cycleChar "░░" 2) ++
+  ["██" ++ cycleChar "░░" 67 ++ "██" ++ (cycleChar "░░" 28) ++ "██" ++ "\n"] ++
+  ["░░" ++ cycleChar "██" 96 ++ "░░" ++ "\n"]
