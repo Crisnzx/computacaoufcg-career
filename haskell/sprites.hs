@@ -14,16 +14,31 @@ getHealthBarSprite:: Int -> String
 --   "░░████████████████████████████████████████████████████████░░"
 --   ]
 
--- getHealthBarSprite life = do
---   let lifeNumberSprite = makeTextLines ("#####" ++ show life) "#"
---   return (unlines lifeNumberSprite)
 
-getHealthBarSprite life = unlines (makeTextLines ("#####" ++ show life ++ "##") "░░")
+getHealthBarSprite life = unlines (
+  makeHealthBarValue life
+  ++ ["░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"]
+  ++ makeHealthBarMeter life
+  )
 
--- regra de 3
--- vida       - 100
--- pixelsVida - 28
--- pixelsVida vai ser ate qual indice a lista vai ser preenchida com ▓▓, e o resto vai ser com ░░
+makeHealthBarValue:: Int -> [String]
+makeHealthBarValue life = makeTextLines ("#######" ++ (padStart life) ++ "#") "░░"
+
+padStart:: Int -> String
+padStart life = drop (length (prepareLifeValue life) - 3) (prepareLifeValue life)
+
+prepareLifeValue:: Int -> String
+prepareLifeValue life = "##" ++ show life
+
+makeHealthBarMeter:: Int -> [String]
+makeHealthBarMeter life = [
+  "░░████████████████████████████████████████████████████████████░░",
+  "██" ++ fillHealthBar (round ((fromIntegral life) * 0.3)) ++  "██",
+  "░░████████████████████████████████████████████████████████████░░"
+  ]
+
+fillHealthBar:: Int -> String
+fillHealthBar life = take (life*2) (cycle "▓▓") ++ take ((30-life)*2) (cycle "░░")
 
 
 getCharacterSprite:: String -> String
@@ -82,6 +97,27 @@ getCharacterSprite "edaBoss" = unlines [
   ]
 
 getCardSprite:: Int -> String
+getCardSprite (-1) = unlines [
+  "██",
+  "██",
+  "██",
+  "██",
+  "██",
+  "██",
+  "██",
+  "██"
+  ]
+
+getCardSprite 0 = unlines [
+  "░░░░░░░░░░░░░░░░",
+  "░░░░░░░░░░░░░░░░",
+  "░░░░░░░░░░░░░░░░",
+  "░░░░░░░░░░░░░░░░",
+  "░░░░░░░░░░░░░░░░",
+  "░░░░░░░░░░░░░░░░",
+  "░░░░░░░░░░░░░░░░",
+  "░░░░░░░░░░░░░░░░"
+  ]
 getCardSprite 2 = unlines [
   "░░one█████████░░",
   "██░░░░░░░░░░░░██",
