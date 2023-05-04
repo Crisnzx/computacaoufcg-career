@@ -13,3 +13,8 @@ main = do
   print ""
   mapM_ putStr (makeTextLines "estes a comecar" (makeSpaces 1))
   mapM_ putStr (makeHealthBarLines [52, 10] (makeSpaces 15))
+
+
+-- terminar a sprite de healthbar
+-- criar funcao makeBattlefield
+-- corrigir as sprites de numero
