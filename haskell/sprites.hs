@@ -1,15 +1,45 @@
 module Sprites (getHealthBarSprite, getCharacterSprite, getCardSprite, getCharSprite) where
 
 getHealthBarSprite:: Int -> String
-getHealthBarSprite life = unlines [
-  "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█▀▀█░░█▀▀█░░█▀▀█░░",
-  "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█▄▄█░░█▄▄█░░█▄▄█░░",
-  "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▄▄▄█░░▄▄▄█░░▄▄▄█░░",
-  "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░",
-  "░░████████████████████████████████████████████████████████░░",
-  "██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░██",
-  "░░████████████████████████████████████████████████████████░░"
+-- getHealthBarSprite life = unlines [
+--   "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█▀▀█░░█▀▀█░░█▀▀█░░",
+--   "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░█▄▄█░░█▄▄█░░█▄▄█░░",
+--   "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▄▄▄█░░▄▄▄█░░▄▄▄█░░",
+--   "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░",
+
+
+
+--   "░░████████████████████████████████████████████████████████░░",
+--   "██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░██",
+--   "░░████████████████████████████████████████████████████████░░"
+--   ]
+
+
+getHealthBarSprite life = unlines (
+  makeHealthBarValue life
+  ++ ["░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"]
+  ++ makeHealthBarMeter life
+  )
+
+makeHealthBarValue:: Int -> [String]
+makeHealthBarValue life = makeTextLines ("#######" ++ (padStart life) ++ "#") "░░"
+
+padStart:: Int -> String
+padStart life = drop (length (prepareLifeValue life) - 3) (prepareLifeValue life)
+
+prepareLifeValue:: Int -> String
+prepareLifeValue life = "##" ++ show life
+
+makeHealthBarMeter:: Int -> [String]
+makeHealthBarMeter life = [
+  "░░████████████████████████████████████████████████████████████░░",
+  "██" ++ fillHealthBar (round ((fromIntegral life) * 0.3)) ++  "██",
+  "░░████████████████████████████████████████████████████████████░░"
   ]
+
+fillHealthBar:: Int -> String
+fillHealthBar life = take (life*2) (cycle "▓▓") ++ take ((30-life)*2) (cycle "░░")
+
 
 getCharacterSprite:: String -> String
 getCharacterSprite "mainCharacter" = unlines [
@@ -67,6 +97,27 @@ getCharacterSprite "edaBoss" = unlines [
   ]
 
 getCardSprite:: Int -> String
+getCardSprite (-1) = unlines [
+  "██",
+  "██",
+  "██",
+  "██",
+  "██",
+  "██",
+  "██",
+  "██"
+  ]
+
+getCardSprite 0 = unlines [
+  "░░░░░░░░░░░░░░░░",
+  "░░░░░░░░░░░░░░░░",
+  "░░░░░░░░░░░░░░░░",
+  "░░░░░░░░░░░░░░░░",
+  "░░░░░░░░░░░░░░░░",
+  "░░░░░░░░░░░░░░░░",
+  "░░░░░░░░░░░░░░░░",
+  "░░░░░░░░░░░░░░░░"
+  ]
 getCardSprite 2 = unlines [
   "░░one█████████░░",
   "██░░░░░░░░░░░░██",
@@ -189,11 +240,6 @@ getCardSprite 13 = unlines [
   ]
 
 getCharSprite:: Char -> String
-getCharSprite '8' = unlines [
-  "█▀▀█",
-  "█■■█",
-  "█▄▄█"
-  ]
 getCharSprite 'a' = unlines [
   "█▀▀█",
   "█■■█",
@@ -327,8 +373,95 @@ getCharSprite 'z' = unlines [
   "█▄▄▄"
   ]
 
+getCharSprite '0' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
+getCharSprite '1' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
+getCharSprite '2' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
+getCharSprite '3' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
+getCharSprite '4' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
+getCharSprite '5' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
+getCharSprite '6' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
+getCharSprite '7' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
+getCharSprite '8' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
+getCharSprite '9' = unlines [
+  "▀▀▀█",
+  " ▄▀ ",
+  "█▄▄▄"
+  ]
+
 getCharSprite ' ' = unlines [
   "    ",
   "    ",
   "    "
   ]
+
+getCharSprite '#' = unlines [
+  "░░░░",
+  "░░░░",
+  "░░░░"
+  ]
+
+getCharSprite char = unlines [
+  "░░░░",
+  "░░░░",
+  "░░░░"
+  ]
+
+
+makeTextLines:: [Char] -> String -> [String]
+makeTextLines dataList spacer =
+    let sprites = map (\char -> getCharSprite char) dataList
+    in (concatLines (map (\sprite -> lines sprite) sprites) 0 spacer)
+
+concatLines:: [[String]] -> Int -> String -> [String]
+concatLines sprites lineNumber spacer
+  | lineNumber < length (sprites !! 0) = [concatLine sprites lineNumber spacer] ++ concatLines sprites (lineNumber+1) spacer
+  | otherwise = []
+
+concatLine:: [[String]] -> Int -> String -> String
+concatLine (h: []) lineNumber spacer = h !! lineNumber
+concatLine (h: t) lineNumber spacer = h !! lineNumber ++ spacer ++ concatLine t lineNumber spacer

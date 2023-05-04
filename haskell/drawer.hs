@@ -1,9 +1,9 @@
-module Drawer (makeHealthBarLines, makeCharacterLines, makeCharLines, makeCardLines, makeSpaces) where
+module Drawer (makeBattlefield, makeText) where
 import Sprites
 
 makeHealthBarLines:: [Int] -> String -> [String]
 makeHealthBarLines dataList spacer =
-    let sprites = map (\character -> getHealthBarSprite character) dataList
+    let sprites = map (\lifeNumber -> getHealthBarSprite lifeNumber) dataList
     in (concatLines (map (\sprite -> lines sprite) sprites) 0 spacer)
 
 makeCharacterLines:: [String] -> String -> [String]
@@ -11,24 +11,21 @@ makeCharacterLines dataList spacer =
     let sprites = map (\character -> getCharacterSprite character) dataList
     in (concatLines (map (\sprite -> lines sprite) sprites) 0 spacer)
 
-makeCharLines:: [Char] -> String -> [String]
-makeCharLines dataList spacer =
+makeText:: [Char] -> [String]
+makeText dataList =
     let sprites = map (\char -> getCharSprite char) dataList
-    in (concatLines (map (\sprite -> lines sprite) sprites) 0 spacer)
+    in (concatLines (map (\sprite -> lines sprite) sprites) 0 " ")
 
-makeCardLines:: [Int] -> String -> [String]
-makeCardLines dataList spacer =
-    let sprites = map (\cardNumber -> getCardSprite cardNumber) dataList
+makeCardLines:: [Int] -> [Int] -> String -> [String]
+makeCardLines playerCards currentCards spacer =
+    let sprites = map (\cardNumber -> getCardSprite cardNumber) ([-1] ++ playerCards ++ [-1] ++ currentCards ++ [-1])
     in concatLines (map (\sprite -> lines sprite) sprites) 0 spacer
 
 makeGenericLines:: [String] -> String -> [String]
 makeGenericLines sprites spacer = (concatLines (map (\sprite -> lines sprite) sprites) 0 spacer)
 
-
-makeSpaces:: Int -> String
-makeSpaces 0 = ""
-makeSpaces n = " " ++ makeSpaces (n-1)
-
+cycleChar:: String -> Int -> String
+cycleChar char n = take (n*2) (cycle char)
 
 concatLines:: [[String]] -> Int -> String -> [String]
 concatLines sprites lineNumber spacer
@@ -38,3 +35,21 @@ concatLines sprites lineNumber spacer
 concatLine:: [[String]] -> Int -> String -> String
 concatLine (h: []) lineNumber spacer = h !! lineNumber ++ "\n"
 concatLine (h: t) lineNumber spacer = h !! lineNumber ++ spacer ++ concatLine t lineNumber spacer
+
+
+
+
+
+-- receives the battle params and returns the list of strings that will be printed
+makeBattlefield:: Int -> Int -> String -> [Int] -> [Int] -> [String]
+makeBattlefield playerLife bossLife boss playerCards currentCards =
+  [cycleChar "░░" 84 ++ "\n"] ++
+  makeHealthBarLines [playerLife, bossLife] (cycleChar "░░" 10) ++
+  [cycleChar "░░" 84 ++ "\n"] ++
+  makeCharacterLines ["mainCharacter", boss] (cycleChar "░░" 32) ++
+  [cycleChar "░░" 84 ++ "\n"] ++
+  ["░░" ++ cycleChar "██" 84 ++ "░░" ++ "\n"] ++
+  ["██" ++ cycleChar "░░" 58 ++ "██" ++ (cycleChar "░░" 25) ++ "██" ++ "\n"] ++
+  makeCardLines playerCards currentCards (cycleChar "░░" 3) ++
+  ["██" ++ cycleChar "░░" 58 ++ "██" ++ (cycleChar "░░" 25) ++ "██" ++ "\n"] ++
+  ["░░" ++ cycleChar "██" 84 ++ "░░" ++ "\n"]

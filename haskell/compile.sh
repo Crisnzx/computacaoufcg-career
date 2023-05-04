@@ -1,0 +1,1 @@
+clear && ghc --make main.hs && ./main
