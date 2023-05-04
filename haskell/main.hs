@@ -4,7 +4,7 @@ import Drawer
 main:: IO()
 main = do
   mapM_ putStr (makeText "prepare-se a batalha sapato")
-  mapM_ putStr (makeBattlefield 40 50 "edaBoss" [2, 13, 9, 1, 6] [13, 9])
+  mapM_ putStr (makeBattlefield 40 50 "plpBoss" [2, 13, 9, 1, 6] [13, 9])
 
 
 -- corrigir as sprites de numero
