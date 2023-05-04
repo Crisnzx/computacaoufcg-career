@@ -46,7 +46,7 @@ makeBattlefield playerLife bossLife boss playerCards currentCards =
   [cycleChar "░░" 98 ++ "\n"] ++
   makeHealthBarLines [playerLife, bossLife] (cycleChar "░░" 22) ++
   [cycleChar "░░" 98 ++ "\n"] ++
-  makeCharacterLines ["mainCharacter", boss] (cycleChar "░░" 56) ++
+  makeCharacterLines ["mainCharacter", boss] (cycleChar "░░" 40) ++
   [cycleChar "░░" 98 ++ "\n"] ++
   ["░░" ++ cycleChar "██" 96 ++ "░░" ++ "\n"] ++
   ["██" ++ cycleChar "░░" 67 ++ "██" ++ (cycleChar "░░" 28) ++ "██" ++ "\n"] ++
