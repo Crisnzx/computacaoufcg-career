@@ -1,11 +1,13 @@
-import Menu
+import Battle
 import Drawer
+import Menu
 
-main:: IO()
+main :: IO ()
 main = do
-  mapM_ putStr (makeText "prepare-se. o sapato eh amalero!?")
-  mapM_ putStr (makeBattlefield 97 4 "plpBoss" [2, 13, 9, 1, 6] [13, 9])
+  let state = BattleState {playerLife = 97, bossLife = 50, boss = "plpBoss", playerCards = [2, 13, 9, 1, 6], currentCards = [0, 0], bossCards = [2, 13, 9, 1, 6]}
+  battle state
 
+-- mapM_ putStr (makeText "prepare-se. o sapato eh amalero!?")
 
 -- corrigir as sprites de numero
 
@@ -23,5 +25,3 @@ main = do
 
 -- cada funcao dessa sera do tipo IO e serae um loop que vai gerenciar as entradas e printara
 -- as interfaces com o makeBattlefield e o makeText.
-
-
