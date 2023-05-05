@@ -1,4 +1,4 @@
-module Drawer (makeBattlefield, makeText) where
+module Drawer (makeBattlefield, makeTextScreen) where
 import Sprites
 
 makeHealthBarLines:: [Int] -> String -> [String]
@@ -12,8 +12,8 @@ makeCharacterLines dataList spacer =
     in (concatLines (map (\sprite -> lines sprite) sprites) 0 spacer)
 
 makeText:: [Char] -> [String]
-makeText dataList =
-    let sprites = map (\char -> getCharSprite char) dataList
+makeText text =
+    let sprites = map (\char -> getCharSprite char) (take 40 (text ++ cycle "#"))
     in (concatLines (map (\sprite -> lines sprite) sprites) 0 " ")
 
 makeCardLines:: [Int] -> [Int] -> String -> [String]
@@ -37,7 +37,15 @@ concatLine (h: []) lineNumber spacer = h !! lineNumber ++ "\n"
 concatLine (h: t) lineNumber spacer = h !! lineNumber ++ spacer ++ concatLine t lineNumber spacer
 
 
+makeTextScreen:: [String] -> [String]
+makeTextScreen texts = 
+    [cycleChar "██" 98 ++ "\n"] ++
+    ["██" ++ cycleChar "░░" 96 ++ "██" ++ "\n"] ++
+    (flatten (map (\text -> makeText ("(" ++ text ++ ")")) texts))
 
+flatten:: [[a]] -> [a]
+flatten [] = []
+flatten (x:xs) = x ++ flatten xs
 
 
 -- receives the battle params and returns the list of strings that will be printed
