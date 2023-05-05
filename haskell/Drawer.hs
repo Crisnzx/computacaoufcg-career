@@ -1,4 +1,4 @@
-module Drawer (makeBattlefield, makeTextScreen, makeTextScreenContent) where
+module Drawer (makeBattlefield, makeTextScreen) where
 import Sprites
 
 makeHealthBarLines:: [Int] -> String -> [String]
@@ -55,7 +55,7 @@ makeTextScreen:: [String] -> [String]
 makeTextScreen texts = 
     [cycleChar "██" 98 ++ "\n"] ++
     getBorderSpacer "░░" ++
-    (flatten (map (\text -> makeText ("(" ++ text ++ ")") ++ getBorderSpacer " " ++ getBorderSpacer " ") texts)) ++
+    (flatten (map (\text -> makeText ("(" ++ text ++ ")") ++ getBorderSpacer " " ++ getBorderSpacer " ") (makeTextScreenContent texts))) ++
     getBorderSpacer "░░" ++
     getBorderSpacer "░░" ++
     [cycleChar "██" 98 ++ "\n"]
