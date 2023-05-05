@@ -4,7 +4,7 @@ import Menu
 
 main :: IO ()
 main = do
-  let state = BattleState {playerLife = 97, bossLife = 50, boss = "plpBoss", playerCards = [2, 13, 9, 1, 6], currentCards = [0, 0], bossCards = [2, 13, 9, 1, 6]}
+  let state = BattleState {playerLife = 1, bossLife = 50, boss = "plpBoss", playerCards = [2, 13, 9, 1, 6], currentCards = [0, 0], bossCards = [2, 13, 9, 1, 6]}
   battle state
 
 -- mapM_ putStr (makeText "prepare-se. o sapato eh amalero!?")
