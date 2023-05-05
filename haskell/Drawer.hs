@@ -13,7 +13,7 @@ makeCharacterLines dataList spacer =
 
 makeText:: [Char] -> [String]
 makeText text =
-    let sprites = map (\char -> getCharSprite char) (take 40 (text ++ cycle "#"))
+    let sprites = map (\char -> getCharSprite char) (take 40 (text ++ cycle " "))
     in (concatLines (map (\sprite -> lines sprite) sprites) 0 " ")
 
 makeCardLines:: [Int] -> [Int] -> String -> [String]
