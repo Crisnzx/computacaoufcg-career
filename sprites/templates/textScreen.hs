@@ -1,11 +1,17 @@
 [
   "Parabens!",
-  "Aproveite ao máximo toda a experiência proporcionada no curso",
+  "Aproveite ao máximoa tod a experiência proporcionada no curso",
   "Você se tornará um grande cientista da computação",
 ]
 
+["parabens!","aproveite ao maximo a toda experiencia proporcionada no curso","voce se tornara um grande cientista da computacao!"]
 
-"Parabens!\nAproveite ao máximo toda a experiência proporcionada no curso\nVocê se tornará um grande cientista da computação"
+
+"parabens!\naproveite ao maximo toda a experiencia proporcionada no curso\nvoce se tornara um grande cientista da computacao"
+
+"parabens!########################################################aproveite ao maximo toda a experiencia proporcionada no cursovoce se tornara um grande cientista da computacao##########"
+
+"parabens!########################################################aproveite ao maximo toda a experiencia proporcionada no cursovoce se tornara um grande cientista#### da computacao##########"
 
 parsedText = "Parabens!                            Aproveite ao maximo toda a experiencia proporcionada no curso             Você se tornará um grande cientista da computação         " 
 

@@ -1,4 +1,4 @@
-module Drawer (makeBattlefield, makeTextScreen) where
+module Drawer (makeBattlefield, makeTextScreen, makeTextScreenContent) where
 import Sprites
 
 makeHealthBarLines:: [Int] -> String -> [String]
@@ -37,17 +37,6 @@ concatLine (h: []) lineNumber spacer = h !! lineNumber ++ "\n"
 concatLine (h: t) lineNumber spacer = h !! lineNumber ++ spacer ++ concatLine t lineNumber spacer
 
 
-makeTextScreen:: [String] -> [String]
-makeTextScreen texts = 
-    [cycleChar "██" 98 ++ "\n"] ++
-    ["██" ++ cycleChar "░░" 96 ++ "██" ++ "\n"] ++
-    (flatten (map (\text -> makeText ("(" ++ text ++ ")")) texts))
-
-flatten:: [[a]] -> [a]
-flatten [] = []
-flatten (x:xs) = x ++ flatten xs
-
-
 -- receives the battle params and returns the list of strings that will be printed
 makeBattlefield:: Int -> Int -> String -> [Int] -> [Int] -> [String]
 makeBattlefield playerLife bossLife boss playerCards currentCards =
@@ -61,3 +50,39 @@ makeBattlefield playerLife bossLife boss playerCards currentCards =
   makeCardLines playerCards currentCards (cycleChar "░░" 2) ++
   ["██" ++ cycleChar "░░" 67 ++ "██" ++ (cycleChar "░░" 28) ++ "██" ++ "\n"] ++
   ["░░" ++ cycleChar "██" 96 ++ "░░" ++ "\n"]
+
+makeTextScreen:: [String] -> [String]
+makeTextScreen texts = 
+    [cycleChar "██" 98 ++ "\n"] ++
+    getBorderSpacer "░░" ++
+    (flatten (map (\text -> makeText ("(" ++ text ++ ")") ++ getBorderSpacer " " ++ getBorderSpacer " ") texts)) ++
+    getBorderSpacer "░░" ++
+    getBorderSpacer "░░" ++
+    [cycleChar "██" 98 ++ "\n"]
+
+getBorderSpacer:: String -> [String]
+getBorderSpacer spacer = ["██░░░░" ++ cycleChar spacer 93 ++ "░░██" ++ "\n"]
+
+flatten:: [[a]] -> [a]
+flatten [] = []
+flatten (x:xs) = x ++ flatten xs
+
+makeTextScreenContent :: [String] -> [String]
+makeTextScreenContent content = splitLines (handleBreakLines (unlines content) 0) 0
+
+handleBreakLines:: [Char] -> Int -> String
+handleBreakLines [] c = cycle " "
+handleBreakLines (char: tail) charCount =
+  if (char == '\n') then
+    ((take (37 - (charCount `mod` 37))) (cycle " "))  ++ handleBreakLines tail 0
+  else
+    char : handleBreakLines tail (charCount + 1)
+
+-- splitLines :: String -> Int -> [String]
+-- splitLines content = [ take 37 content ] ++ splitLines (drop 37 content)
+
+splitLines :: String -> Int -> [String]
+splitLines content 9 = []
+splitLines content lineNumber =
+  let (line, rest) = splitAt 37 content
+  in line : splitLines rest (lineNumber + 1)
