@@ -1,12 +1,9 @@
 module Menu (printMenu, onChosenOption) where
-
--- This code is not native from haskell, to use third-party libraries we need to configure cabal package manager
--- import Data.Time.Clock
--- import Data.Time.Calendar
+import Drawer
 
 printMenu:: IO()
 printMenu = do
-  putStrLn "Ola, bem vindo ao nosso jogo computacao ufcg career."
+  mapM_ putStr (makeTextScreen ["ola, bem vindo ao nosso jogo computacao ufcg career."])
   putStrLn "============ MENU ============"
   putStrLn "1- Iniciar o jogo"
   putStrLn "2- Tutorial"
