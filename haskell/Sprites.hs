@@ -638,10 +638,6 @@ getCharSprite ')' = unlines [
   "░░██",
   "░░██"
   ]
-getCharSprite '_' = unlines [
-  "░░░░",
-  "░░░░"
-  ]
 getCharSprite char = unlines [
   "░░░░",
   "░░░░",
