@@ -78,9 +78,6 @@ handleBreakLines (char: tail) charCount =
   else
     char : handleBreakLines tail (charCount + 1)
 
--- splitLines :: String -> Int -> [String]
--- splitLines content = [ take 37 content ] ++ splitLines (drop 37 content)
-
 splitLines :: String -> Int -> [String]
 splitLines content 9 = []
 splitLines content lineNumber =
