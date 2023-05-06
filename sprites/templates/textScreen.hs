@@ -54,7 +54,7 @@ infiniteText = take (37*9) (parsedText ++ cycle " ")
 
 makeTextScreenContent:: [Char] -> Int -> [String]
 makeTextScreenContent text 0 = ""
-makeTextScreenContent text count = makeText (take 37 text) ++ makeTextScreenContent (text !! 37) (count-1)
+makeTextScreenContent text count = makeTextLines (take 37 text) ++ makeTextScreenContent (text !! 37) (count-1)
 
 
 
