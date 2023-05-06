@@ -1,55 +1,56 @@
 module Menu (printMenu, onChosenOption) where
 import Drawer
+import System.Process (callCommand)
+import Control.Concurrent (threadDelay)
+
+clearScreen :: IO ()
+clearScreen = callCommand "clear"
 
 printMenu:: IO()
 printMenu = do
-  mapM_ putStr (makeTextScreen ["ola, bem vindo ao nosso jogo computacao ufcg career."])
-  putStrLn "============ MENU ============"
-  putStrLn "1- Iniciar o jogo"
-  putStrLn "2- Tutorial"
-  putStrLn "3- Conhecer os desenvolvedores"
-  putStrLn "4- Sair"
+  clearScreen
+  mapM_ putStr (makeTextScreen ["ola bem vindo ao nosso jogo", "computacao ufcg career", "", "---menu---","1-iniciar o jogo", "2-tutorial", "3-customizar personagem", "4-sair"])
 
   chosenOption <- readLn :: IO Int
+  clearScreen
+
   onChosenOption chosenOption
 
 onChosenOption:: Int -> IO()
 onChosenOption 1 = startGame
 onChosenOption 2 = openTutorial
-onChosenOption 3 = knowTheDevelopers
+onChosenOption 3 = customizeCharacter
 onChosenOption 4 = return ()
 onChosenOption invalidOption = do
-  putStrLn "\nOpção inválida, tente novamente\n"
+  clearScreen
+  mapM_ putStr (makeTextScreen ["-- opcao invalida tente novamente --"])
+  threadDelay (1 * 1500000) -- 1.5 segundo
   printMenu
   
 
 startGame:: IO ()
 startGame = do
-  putStrLn "Parabéns! Você foi aprovado no curso de Computação da UFCG pelo sisu 2023.1"
-  putStrLn "Aproveite ao máximo toda a experiência proporcionada no curso, dessa forma temos certeza"
-  putStrLn "Que você se tornará um grande cientista da computação com uma qualificação altamente acima da média do mercado"
-  putStrLn "Lembre-se que para que você tenha sucesso na jornada será necessário muita dedicação e estudo"
-  putStrLn "Mas também tenha em mente que apenas o conhecimento técnico não é tudo."
-  putStrLn "aproveite para fazer grandes amigos e a aprender e ensinar com os outros, pois a experiência social também"
-  putStrLn "Tem um papel importantíssimo na sua formação profissional"
+  mapM_ putStr (makeTextScreen ["parabens! voce foi aprovado no curso de computacao da ufcg no sisu 2023.1", "aproveite ao maximo toda experiencia", "proporcionada no curso", "dessa forma temos certeza que", "voce se tornara", "um grande cientista da computacao", "com uma qualificacao altamente acima da media do mercado!!"])
   onEnterContinue
-  putStrLn "Antes de iniciar o primeiro período, precisamos conhecer o coordenador Fubica..."
+  clearScreen
+  mapM_ putStr (makeTextScreen ["antes de iniciar o primeiro periodo", "precisamos conhecer","", "o coordenador fubica..."])
 
 openTutorial:: IO()
 openTutorial = do
-  putStrLn "Tutorial do jogo..."
+  mapM_ putStr (makeTextScreen ["tutorial do jogo..."])
   onEnterContinue
-  putStrLn "Mais uma linha do tutorial..."
+  clearScreen
+  mapM_ putStr (makeTextScreen ["mais uma linha do tutorial do jogo"])
   onEnterGoBackToMenu
 
-knowTheDevelopers:: IO()
-knowTheDevelopers = do
-  putStrLn "Developers"
+customizeCharacter:: IO()
+customizeCharacter = do
+  mapM_ putStr (makeTextScreen ["--- customize seu personagem ---", "", ""])
   onEnterGoBackToMenu
 
 onEnterGoBackToMenu:: IO()
 onEnterGoBackToMenu = do
-  putStrLn "Pressione enter para voltar para o menu inicial."
+  putStrLn "=== Pressione enter para voltar para o menu inicial. ==="
   line2 <- getLine:: IO String
   printMenu
 
