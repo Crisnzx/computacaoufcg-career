@@ -1,10 +1,10 @@
 module Sprites (getHealthBarSprite, getCharacterSprite, getCardSprite, getCharSprite, paintSpritePixels) where
 
-getHealthBarSprite:: Int -> String
-getHealthBarSprite life = unlines (
+getHealthBarSprite:: Int -> Int -> String
+getHealthBarSprite life energy = unlines (
   makeHealthBarValue life
   ++ ["░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"]
-  ++ makeHealthBarMeter life
+  ++ makeHealthBarMeter life energy
   )
 
 makeHealthBarValue:: Int -> [String]
@@ -16,12 +16,12 @@ padStart life = drop (length (prepareLifeValue life) - 3) (prepareLifeValue life
 prepareLifeValue:: Int -> String
 prepareLifeValue life = "##" ++ show life
 
-makeHealthBarMeter:: Int -> [String]
-makeHealthBarMeter life = [
+makeHealthBarMeter:: Int -> Int -> [String]
+makeHealthBarMeter life energy = [
   "░░░░░░░░████████████████████████████████████████████████████████████░░░░░░░░",
   "░░░░░░██" ++ fillHealthBar (getHealthBarColor life) (round ((fromIntegral life) * 0.3)) ++  "██░░░░░░",
   "░░░░░░██████████████████████████████████████████████████████████████░░░░░░░░",
-  "░░░░░░██" ++ fillEnergyBar (round ((fromIntegral 50) * 0.2)) ++ "██░░░░░░░░░░░░░░░░░░░░░░░░░░",
+  "░░░░░░██" ++ fillEnergyBar (round ((fromIntegral energy) * 0.2)) ++ "██░░░░░░░░░░░░░░░░░░░░░░░░░░",
   "░░░░░░░░████████████████████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░"
   ]
 
