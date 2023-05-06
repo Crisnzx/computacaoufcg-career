@@ -4,10 +4,10 @@ import Sprites
 -- Full screen builders
 
 -- Receives the battle params and returns the list of strings that will be printed
-makeBattlefield:: [String] -> Int -> Int -> String -> [Int] -> [Int] -> [String]
-makeBattlefield playerColors playerLife bossLife boss playerCards currentCards =
+makeBattlefield:: [String] -> (Int, Int) -> Int -> String -> [Int] -> [Int] -> [String]
+makeBattlefield playerColors (playerLife, playerEnergy) bossLife boss playerCards currentCards =
   [cycleChar "░░" 98 ++ "\n"] ++
-  makeHealthBarLines [playerLife, bossLife] (cycleChar "░░" 22) ++
+  makeHealthBarLines [(playerLife, playerEnergy), (bossLife, 100)] (cycleChar "░░" 22) ++
   [cycleChar "░░" 98 ++ "\n"] ++
   makeCharacterLines ["mainCharacter", boss] playerColors (cycleChar "░░" 40) ++
   [cycleChar "░░" 98 ++ "\n"] ++
@@ -19,9 +19,9 @@ makeBattlefield playerColors playerLife bossLife boss playerCards currentCards =
 
 
 -- Battlefield builder utils
-makeHealthBarLines:: [Int] -> String -> [String]
+makeHealthBarLines:: [(Int, Int)] -> String -> [String]
 makeHealthBarLines dataList spacer =
-    let sprites = map (\lifeNumber -> getHealthBarSprite lifeNumber) dataList
+    let sprites = map (\(life, energy) -> getHealthBarSprite life energy) dataList
     in (concatLines (map (\sprite -> lines sprite) sprites) 0 spacer)
 
 makeCharacterLines:: [String] -> [String] -> String -> [String]
