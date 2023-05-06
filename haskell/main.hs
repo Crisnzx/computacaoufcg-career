@@ -3,8 +3,15 @@ import Drawer
 
 main:: IO()
 main = do
-  mapM_ putStr (makeText "prepare-se. o sapato eh amalero!?")
-  mapM_ putStr (makeBattlefield 97 4 "plpBoss" [2, 13, 9, 1, 6] [13, 9])
+  -- mapM_ putStr (makeTextScreen ["prepare-se. o sapato eh amalero!?"])
+  mapM_ putStr (makeTextScreen [
+      "parabens!",
+      "aproveite ao maximo a toda experiencia proporcionada no curso!",
+      "voce se tornara um grande cientista da computacao?",
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ])
+  putStrLn ""
+  mapM_ putStr (makeBattlefield 70 4 "plpBoss" [2, 13, 9, 1, 6] [13, 9])
 
 
 -- corrigir as sprites de numero

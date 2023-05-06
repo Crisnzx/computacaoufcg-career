@@ -34,12 +34,16 @@ makeHealthBarMeter:: Int -> [String]
 makeHealthBarMeter life = [
   "░░░░░░░░████████████████████████████████████████████████████████████░░░░░░░░",
   "░░░░░░██" ++ fillHealthBar (round ((fromIntegral life) * 0.3)) ++  "██░░░░░░",
-  "░░░░░░░░████████████████████████████████████████████████████████████░░░░░░░░"
+  "░░░░░░██████████████████████████████████████████████████████████████░░░░░░░░",
+  "░░░░░░██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░██░░░░░░░░░░░░░░░░░░░░░░░░░░",
+  "░░░░░░░░████████████████████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░"
   ]
 
 fillHealthBar:: Int -> String
-fillHealthBar life = take (life*2) (cycle "▓▓") ++ take ((30-life)*2) (cycle "░░")
+fillHealthBar life = ("\ESC[32m" ++ (take (life*2) (cycle "▓▓"))) ++ ("\ESC[0m" ++ (take ((30-life)*2) (cycle "░░")))
 
+fillEnergyBar:: Int -> String
+fillEnergyBar energy = ("\ESC[36m" ++ (take (energy*2) (cycle "▓▓"))) ++ ("\ESC[0m" ++ (take ((20-energy)*2) (cycle "░░")))
 
 getCharacterSprite:: String -> String
 getCharacterSprite "mainCharacter" = unlines [
@@ -627,6 +631,16 @@ getCharSprite '#' = unlines [
   "░░░░",
   "░░░░",
   "░░░░"
+  ]
+getCharSprite '(' = unlines [
+  "██░░░░",
+  "██░░░░",
+  "██░░░░"
+  ]
+getCharSprite ')' = unlines [
+  "░░██",
+  "░░██",
+  "░░██"
   ]
 getCharSprite char = unlines [
   "░░░░",
