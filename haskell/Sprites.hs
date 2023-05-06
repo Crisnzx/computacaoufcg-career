@@ -38,7 +38,7 @@ makeHealthBarMeter life = [
   ]
 
 fillHealthBar:: Int -> String
-fillHealthBar life = take (life*2) (cycle "▓▓") ++ take ((30-life)*2) (cycle "░░")
+fillHealthBar life = ("\ESC[32m" ++ (take (life*2) (cycle "▓▓"))) ++ ("\ESC[0m" ++ (take ((30-life)*2) (cycle "░░")))
 
 
 getCharacterSprite:: String -> String
