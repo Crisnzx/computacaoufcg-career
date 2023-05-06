@@ -11,7 +11,7 @@ main = do
       "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     ])
   putStrLn ""
-  mapM_ putStr (makeBattlefield 97 4 "plpBoss" [2, 13, 9, 1, 6] [13, 9])
+  mapM_ putStr (makeBattlefield 70 4 "plpBoss" [2, 13, 9, 1, 6] [13, 9])
 
 
 -- corrigir as sprites de numero
