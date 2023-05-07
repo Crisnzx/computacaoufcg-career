@@ -1,17 +1,16 @@
 module Battle where
 
-import Control.Concurrent (threadDelay)
 import Drawer
-import System.Process (callCommand)
+import IOHelpers
+import System.Exit
 import System.Random
 import Text.Printf (printf)
 import Text.Read (readMaybe)
 
-clearScreen :: IO ()
-clearScreen = callCommand "clear"
-
 data BattleState = BattleState
-  { playerLife :: Int,
+  { playerColors :: [String],
+    playerLife :: Int,
+    playerEnergy :: Int,
     bossLife :: Int,
     boss :: String,
     playerCards :: [Int],
@@ -30,9 +29,9 @@ getPlayerChoice = do
           getPlayerChoice
 
 battle :: BattleState -> IO ()
-battle BattleState {playerLife, bossLife, boss, playerCards, currentCards, bossCards} = do
+battle BattleState {playerColors, playerLife, playerEnergy, bossLife, boss, playerCards, currentCards, bossCards} = do
   clearScreen
-  mapM_ putStr (makeBattlefield playerLife bossLife boss playerCards currentCards)
+  mapM_ putStr (makeBattlefield playerColors (playerLife, playerEnergy) bossLife boss playerCards currentCards)
   print playerCards
   print bossCards
 
@@ -48,19 +47,22 @@ battle BattleState {playerLife, bossLife, boss, playerCards, currentCards, bossC
   let bossCardsNew = [if i == (bossChoice - 1) then 0 else x | (x, i) <- zip bossCards [0 ..]]
 
   -- DANO (SE CARTAS SÃO IGUAIS, AMBOS LEVAM DANO)
-  let bossLifeNew = if head currentCards >= currentCards !! 1 then bossLife - 10 else bossLife
-  let playerLifeNew = if head currentCards <= currentCards !! 1 then playerLife - 10 else playerLife
+  let bossLifeNew = if head currentCards >= currentCards !! 1 then bossLife - head currentCards else bossLife
+  let playerLifeNew = if head currentCards <= currentCards !! 1 then playerLife - (currentCards !! 1) else playerLife
 
-  threadDelay (1 * 1000000) -- 1 segundo
+  -- ENERGIA, ao descansar recupera 25, e 5 fixo (BOSS TEM ENERGIA INFINITA)
+  -- não permite passar de energia 100
+  let playerEnergyNew = if head currentCards == 0 then minimum [playerEnergy + (25 + 5), 100] else minimum [playerEnergy + (-20 + 5), 100]
+
+  delay
   if bossLifeNew <= 0 || playerLifeNew <= 0
     then do
       if bossLifeNew <= 0 && playerLifeNew > 0
         then do
-          clearScreen
-          printf "\ESC[32mVOCÊ DERROTOU O BOSS\n"
-          threadDelay (1 * 1000000)
+          printTextScreen ["voce derrotou o boss"]
+          delay
         else do
-          clearScreen
-          printf "\ESC[31mVOCÊ PERDEU\n"
-          threadDelay (1 * 1000000)
-    else battle BattleState {playerLife = playerLifeNew, bossLife = bossLifeNew, boss, playerCards = playerCardsNew, currentCards, bossCards = bossCardsNew}
+          printTextScreen ["voce perdeu"]
+          delay
+          exitSuccess
+    else battle BattleState {playerColors, playerLife = playerLifeNew, playerEnergy = playerEnergyNew, bossLife = bossLifeNew, boss, playerCards = playerCardsNew, currentCards, bossCards = bossCardsNew}
