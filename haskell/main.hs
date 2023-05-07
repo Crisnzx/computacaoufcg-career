@@ -1,27 +1,46 @@
 import Battle
 import Drawer
-import Menu
+import Stories
 
 main :: IO ()
 main = do
-  let state = BattleState {playerLife = 1, bossLife = 50, boss = "plpBoss", playerCards = [2, 13, 9, 1, 6], currentCards = [0, 0], bossCards = [2, 13, 9, 1, 6]}
-  battle state
+  -- o main mostrara a sequencia da historia do jogo
+  printMenu
+  fubicaStory
+  -- fubicaBattle
+  daltonStory
+  -- daltonBattle
+  gaudencioStory
+  -- gaudencioBattle
+  jaStory
+  -- jaBattle
+  evertonStory
+  -- evertonBattle
+  -- endGame
+  
 
 -- mapM_ putStr (makeText "prepare-se. o sapato eh amalero!?")
 
--- corrigir as sprites de numero
 
--- o main mostrara a sequencia da historia do jogo
--- printmenu
--- fubicaStory
--- fubicaBattle
--- daltonStory
--- daltonBattle
--- jaStory
--- jaBattle
--- evertonStory
--- evertonBattle
--- endGame
 
--- cada funcao dessa sera do tipo IO e serae um loop que vai gerenciar as entradas e printara
--- as interfaces com o makeBattlefield e o makeText.
+
+-- mapM_ putStr (makeBattlefield ["yellow", "lightyellow", "blue", "green", "magenta"] (25, 80) 4 "edaBoss" [2, 13, 9, 1, 6] [13, 9])
+
+-- a lista de cores precisa ter tamanho 5 e as cores serão mapeadas nessa ordem: [hair, skin, tshirt, pants, boots]
+-- as cores possíveis são: 
+-- "black"
+-- "red"
+-- "green"
+-- "yellow"
+-- "blue"
+-- "magenta"
+-- "cyan"
+-- "white"
+-- "gray"
+-- "lightred"
+-- "lightgreen"
+-- "lightyellow"
+-- "lightblue"
+-- "lightmagenta"
+-- "lightcyan"
+-- "lightgray"

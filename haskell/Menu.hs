@@ -1,64 +1,58 @@
 module Menu (printMenu, onChosenOption) where
-
--- This code is not native from haskell, to use third-party libraries we need to configure cabal package manager
--- import Data.Time.Clock
--- import Data.Time.Calendar
+import Drawer
+import IOHelpers
+import System.Exit
 
 printMenu:: IO()
 printMenu = do
-  putStrLn "Ola, bem vindo ao nosso jogo computacao ufcg career."
-  putStrLn "============ MENU ============"
-  putStrLn "1- Iniciar o jogo"
-  putStrLn "2- Tutorial"
-  putStrLn "3- Conhecer os desenvolvedores"
-  putStrLn "4- Sair"
+  printTextScreen ["ola bem vindo ao nosso jogo", "computacao ufcg career", "", "---menu---","1-iniciar o jogo", "2-tutorial", "3-customizar personagem", "4-sair"]
 
   chosenOption <- readLn :: IO Int
+
   onChosenOption chosenOption
 
 onChosenOption:: Int -> IO()
 onChosenOption 1 = startGame
 onChosenOption 2 = openTutorial
-onChosenOption 3 = knowTheDevelopers
-onChosenOption 4 = return ()
+onChosenOption 3 = customizeCharacter
+onChosenOption 4 = exitSuccess
 onChosenOption invalidOption = do
-  putStrLn "\nOpção inválida, tente novamente\n"
+  printTextScreen ["-- opcao invalida tente novamente --"]
+  delay
   printMenu
   
 
 startGame:: IO ()
 startGame = do
-  putStrLn "Parabéns! Você foi aprovado no curso de Computação da UFCG pelo sisu 2023.1"
-  putStrLn "Aproveite ao máximo toda a experiência proporcionada no curso, dessa forma temos certeza"
-  putStrLn "Que você se tornará um grande cientista da computação com uma qualificação altamente acima da média do mercado"
-  putStrLn "Lembre-se que para que você tenha sucesso na jornada será necessário muita dedicação e estudo"
-  putStrLn "Mas também tenha em mente que apenas o conhecimento técnico não é tudo."
-  putStrLn "aproveite para fazer grandes amigos e a aprender e ensinar com os outros, pois a experiência social também"
-  putStrLn "Tem um papel importantíssimo na sua formação profissional"
+  printTextScreen ["parabens! voce foi aprovado no curso de computacao da ufcg no sisu 2023.1", "aproveite ao maximo toda experiencia", "proporcionada no curso", "dessa forma temos certeza que", "voce se tornara", "um grande cientista da computacao", "com uma qualificacao altamente acima da media do mercado!!"]
   onEnterContinue
-  putStrLn "Antes de iniciar o primeiro período, precisamos conhecer o coordenador Fubica..."
 
 openTutorial:: IO()
 openTutorial = do
-  putStrLn "Tutorial do jogo..."
+  printTextScreen ["tutorial do jogo..."]
   onEnterContinue
-  putStrLn "Mais uma linha do tutorial..."
+  printTextScreen ["mais uma linha do tutorial do jogo"]
   onEnterGoBackToMenu
 
-knowTheDevelopers:: IO()
-knowTheDevelopers = do
-  putStrLn "Developers"
+customizeCharacter:: IO()
+customizeCharacter = do
+  printTextScreen [
+    "escolha a cor do cabelo",
+    "1- preto           9- branco",
+    "2- cinza          10- cinza claro",
+    "3- vermelho       11- vermelho claro",
+    "4- verde          12- verde claro",
+    "5- amarelo        13- amarelo claro",
+    "6- azul           14- azul claro",
+    "7- magenta        15- magenta claro",
+    "8- ciano          16- ciano claro"
+    ]
   onEnterGoBackToMenu
 
 onEnterGoBackToMenu:: IO()
 onEnterGoBackToMenu = do
-  putStrLn "Pressione enter para voltar para o menu inicial."
+  putStrLn "\n=== Pressione enter para voltar para o menu inicial. ==="
   line2 <- getLine:: IO String
   printMenu
 
 
-onEnterContinue:: IO()
-onEnterContinue = do
-  putStrLn " \n\nPressione enter para continuar."
-  line <- getLine:: IO String
-  putStrLn "\n\n"
