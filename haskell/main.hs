@@ -19,7 +19,7 @@ main = do
             boss = "admBoss",
             playerCards = [0, 0, 0, 0, 0],
             currentCards = [0, 0],
-            difficulty = (1, 3)
+            difficulty = (1, 5)
           }
   battle state
 
@@ -49,7 +49,7 @@ main = do
             boss = "p2Boss",
             playerCards = [0, 0, 0, 0, 0],
             currentCards = [0, 0],
-            difficulty = (4, 8)
+            difficulty = (3, 8)
           }
   battle state
 
@@ -64,7 +64,7 @@ main = do
             boss = "edaBoss",
             playerCards = [0, 0, 0, 0, 0],
             currentCards = [0, 0],
-            difficulty = (6, 10)
+            difficulty = (4, 10)
           }
   battle state
 
@@ -79,7 +79,7 @@ main = do
             boss = "plpBoss",
             playerCards = [0, 0, 0, 0, 0],
             currentCards = [0, 0],
-            difficulty = (9, 13)
+            difficulty = (6, 10)
           }
   battle state
 

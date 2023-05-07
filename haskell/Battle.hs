@@ -18,22 +18,23 @@ data BattleState = BattleState
     difficulty :: (Int, Int)
   }
 
-getPlayerChoice :: IO Int
-getPlayerChoice = do
+getPlayerChoice :: Int -> IO Int
+getPlayerChoice energy = do
   choice <- getLine
   case readMaybe choice of
     Just n
       | n >= 1 && n <= 5 -> return n
       | otherwise -> do
           printf "Escolha inválida\n"
-          getPlayerChoice
+          getPlayerChoice energy
 
+-- CARTAS CUSTAM 20
 battle :: BattleState -> IO ()
 battle BattleState {playerColors, playerLife, playerEnergy, bossLife, boss, playerCards, currentCards, difficulty} = do
   -- SORTEANDO CARTAS NO INICIO DA PARTIDA CARTAS ZERADAS = 5
   let count = length [x | x <- playerCards, x == 0]
   let aux = playerCards
-  randomCards <- sequence [randomRIO (2, 12) | _ <- [1 .. 5]]
+  randomCards <- sequence [randomRIO (3, 13) | _ <- playerCards]
   let playerCards = if count == 5 then randomCards else aux
 
   clearScreen
@@ -43,9 +44,9 @@ battle BattleState {playerColors, playerLife, playerEnergy, bossLife, boss, play
   -- CARTA 0 REGENERA
   -- BOT TEM ENERGIA INFINITA, DIFICULDADE É O RANGE DO NÚMERO RANDOM
   printf "Escolha uma carta de 1-%d\n" (length playerCards)
-  choice <- getPlayerChoice
+  choice <- getPlayerChoice playerEnergy
   bossChoice <- randomRIO difficulty
-  let currentCards = [playerCards !! (choice - 1), bossChoice]
+  let currentCards = [if playerEnergy < 20 then 0 else playerCards !! (choice - 1), bossChoice]
 
   -- REMOVENDO CARTA DO DECK (ZERANDO A CARTA) E PEGANDO DUAS CARTAS caso forem duas zerada
   -- também pode descansar com uma zerada
