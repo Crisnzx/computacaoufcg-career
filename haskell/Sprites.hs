@@ -209,11 +209,11 @@ getCharacterSprite "edaBoss" _ = paintCharacter (unlines [
   "░░░░░░░░██▓▓██▓▓████▓▓ssssbb▓▓░░░░░░░░░░░░░░░░░░░░░░░░░░░░",
   "░░░░░░░░██▓▓▓▓ss▓▓▓▓▓▓ssbbbb████░░░░░░░░░░░░░░░░░░░░░░░░░░",
   "░░░░░░██████bb████████bbbb██tttt████░░░░░░░░░░░░░░░░░░░░░░",
-  "░░░░██ttpptt██bbbbbbbbbb██ttttttpptt██░░░░░░░░░░░░░░░░░░░░",
-  "░░░░██ttttpptt██████████ttttttpptttt██░░░░░░░░░░░░░░░░░░░░",
-  "░░██ss██tttt██pppppppppppppp██tttt██ss██░░░░░░░░░░░░░░░░░░",
+  "░░░░██tttttt██bbbbbbbbbb██tttttttttt██░░░░░░░░░░░░░░░░░░░░",
+  "░░░░██tttttttt██████████tttttttttttt██░░░░░░░░░░░░░░░░░░░░",
+  "░░██ss██tttt██tttttttttttttt██tttt██ss██░░░░░░░░░░░░░░░░░░",
   "░░██ssss██████tttttttttttttt██████ssss██░░░░░░░░░░░░░░░░░░",
-  "░░██ssssss████pppppppppppppp████ssssss██░░░░░░░░░░░░░░░░░░",
+  "░░██ssssss████tttttttttttttt████ssssss██░░░░░░░░░░░░░░░░░░",
   "░░██ssssss████tttttttttttttt████ssssss██░░░░░░░░░░░░░░░░░░",
   "░░░░██████░░██████████████████░░██████░░░░░░░░░░░░░░░░░░░░",
   "░░░░░░░░░░██pppppppppppppppppp██░░░░░░░░░░░░░░░░░░░░░░░░░░",
@@ -222,7 +222,7 @@ getCharacterSprite "edaBoss" _ = paintCharacter (unlines [
   "░░████bbbbbbbbbb██░░░░░░██bbbbbbbbbb████░░░░░░░░░░░░░░░░░░",
   "██bbbbbbbbbbbbbb██░░░░░░██bbbbbbbbbbbbbb██░░░░░░░░░░░░░░░░",
   "██████████████████░░░░░░██████████████████░░░░░░░░░░░░░░░░"
-  ]) ["default", "lightyellow", "blue", "white", "gray"] 0
+  ]) ["default", "lightyellow", "lightmagenta", "magenta", "gray"] 0
 
 getCharacterSprite "plpBoss" _ = paintCharacter (unlines [
   "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░",
