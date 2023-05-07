@@ -12,6 +12,7 @@ data BattleState = BattleState
     playerLife :: Int,
     playerEnergy :: Int,
     bossLife :: Int,
+    bossEnergy :: Int,
     boss :: String,
     playerCards :: [Int],
     currentCards :: [Int],
@@ -28,9 +29,8 @@ getPlayerChoice energy = do
           printf "Escolha inválida\n"
           getPlayerChoice energy
 
--- CARTAS CUSTAM 20
 battle :: BattleState -> IO ()
-battle BattleState {playerColors, playerLife, playerEnergy, bossLife, boss, playerCards, currentCards, difficulty} = do
+battle BattleState {playerColors, playerLife, playerEnergy, bossLife, bossEnergy, boss, playerCards, currentCards, difficulty} = do
   -- SORTEANDO CARTAS NO INICIO DA PARTIDA CARTAS ZERADAS = 5
   let count = length [x | x <- playerCards, x == 0]
   let aux = playerCards
@@ -41,12 +41,13 @@ battle BattleState {playerColors, playerLife, playerEnergy, bossLife, boss, play
   mapM_ putStr (makeBattlefield playerColors (playerLife, playerEnergy) bossLife boss playerCards currentCards)
 
   -- ESCOLHA
+  -- CARTAS > 0 CUSTAM 20
   -- CARTA 0 REGENERA
-  -- BOT TEM ENERGIA INFINITA, DIFICULDADE É O RANGE DO NÚMERO RANDOM
+  -- DIFICULDADE É O RANGE DO NÚMERO RANDOM
   printf "Escolha uma carta de 1-%d\n" (length playerCards)
   choice <- getPlayerChoice playerEnergy
   bossChoice <- randomRIO difficulty
-  let currentCards = [if playerEnergy < 20 then 0 else playerCards !! (choice - 1), bossChoice]
+  let currentCards = [if playerEnergy < 20 then 0 else playerCards !! (choice - 1), if bossEnergy < 20 then 0 else bossChoice]
 
   -- REMOVENDO CARTA DO DECK (ZERANDO A CARTA) E PEGANDO DUAS CARTAS caso forem duas zerada
   -- também pode descansar com uma zerada
@@ -59,16 +60,20 @@ battle BattleState {playerColors, playerLife, playerEnergy, bossLife, boss, play
   let bossLifeNew = if head currentCards >= currentCards !! 1 then bossLife - head currentCards else bossLife
   let playerLifeNew = if head currentCards <= currentCards !! 1 then playerLife - (currentCards !! 1) else playerLife
 
-  -- ENERGIA, ao descansar recupera 25, e 5 fixo (BOSS TEM ENERGIA INFINITA)
+  -- ENERGIA, ao descansar recupera 25, e 5 fixo
   -- não permite passar de energia 100
+  -- O BOSS DESCANSA DEPOIS DE 5 ATAQUES, RECUPERANDO A ENERGIA TODA
   let playerEnergyNew = if head currentCards == 0 then minimum [playerEnergy + (25 + 5), 100] else minimum [playerEnergy + (-20 + 5), 100]
+  let bossEnergyNew = if currentCards !! 1 == 0 then 100 else bossEnergy - 20
 
+  -- MOSTRA JOGADA DO PLAYER
   clearScreen
-  mapM_ putStr (makeBattlefield playerColors (playerLife, playerEnergy) bossLife boss playerCardsZero [currentCards !! 0, 0])
+  mapM_ putStr (makeBattlefield playerColors (playerLife, playerEnergyNew) bossLife boss playerCardsZero [head currentCards, 0])
   delay
 
+  -- MOSTRA JOGADA DO BOT
   clearScreen
-  mapM_ putStr (makeBattlefield playerColors (playerLife, playerEnergy) bossLife boss playerCardsZero currentCards)
+  mapM_ putStr (makeBattlefield playerColors (playerLife, playerEnergyNew) bossLife boss playerCardsZero currentCards)
   delay
   if bossLifeNew <= 0 || playerLifeNew <= 0
     then do
@@ -80,4 +85,4 @@ battle BattleState {playerColors, playerLife, playerEnergy, bossLife, boss, play
           printTextScreen ["voce perdeu"]
           delay
           exitSuccess
-    else battle BattleState {playerColors, playerLife = playerLifeNew, playerEnergy = playerEnergyNew, bossLife = bossLifeNew, boss, playerCards = playerCardsNew, currentCards = [0,0], difficulty}
+    else battle BattleState {playerColors, playerLife = playerLifeNew, playerEnergy = playerEnergyNew, bossLife = bossLifeNew, bossEnergy = bossEnergyNew, boss, playerCards = playerCardsNew, currentCards = [0, 0], difficulty}
