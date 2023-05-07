@@ -652,6 +652,13 @@ getCharSprite '.' = unlines [
   "    ",
   " ▄  "
   ]
+
+getCharSprite ',' = unlines [
+  "    ",
+  "    ",
+  "▄▀  "
+  ]
+
 getCharSprite '!' = unlines [
   " █  ",
   " █  ",
