@@ -15,36 +15,45 @@ data BattleState = BattleState
     boss :: String,
     playerCards :: [Int],
     currentCards :: [Int],
-    bossCards :: [Int]
+    difficulty :: (Int, Int)
   }
 
-getPlayerChoice :: IO Int
-getPlayerChoice = do
+getPlayerChoice :: Int -> IO Int
+getPlayerChoice energy = do
   choice <- getLine
   case readMaybe choice of
     Just n
       | n >= 1 && n <= 5 -> return n
       | otherwise -> do
           printf "Escolha inválida\n"
-          getPlayerChoice
+          getPlayerChoice energy
 
+-- CARTAS CUSTAM 20
 battle :: BattleState -> IO ()
-battle BattleState {playerColors, playerLife, playerEnergy, bossLife, boss, playerCards, currentCards, bossCards} = do
+battle BattleState {playerColors, playerLife, playerEnergy, bossLife, boss, playerCards, currentCards, difficulty} = do
+  -- SORTEANDO CARTAS NO INICIO DA PARTIDA CARTAS ZERADAS = 5
+  let count = length [x | x <- playerCards, x == 0]
+  let aux = playerCards
+  randomCards <- sequence [randomRIO (3, 13) | _ <- playerCards]
+  let playerCards = if count == 5 then randomCards else aux
+
   clearScreen
   mapM_ putStr (makeBattlefield playerColors (playerLife, playerEnergy) bossLife boss playerCards currentCards)
-  print playerCards
-  print bossCards
 
-  -- ESCOLHA (O BOT E PLAYER PODEM ESCOLHER CARTAS DE VALOR ZERO, estou pensando sobre a criação de getBotChoice)
+  -- ESCOLHA
+  -- CARTA 0 REGENERA
+  -- BOT TEM ENERGIA INFINITA, DIFICULDADE É O RANGE DO NÚMERO RANDOM
   printf "Escolha uma carta de 1-%d\n" (length playerCards)
-  choice <- getPlayerChoice
-  gen <- newStdGen
-  let (bossChoice, _) = randomR (1, 5) gen :: (Int, StdGen)
-  let currentCards = [playerCards !! (choice - 1), bossCards !! (bossChoice - 1)]
+  choice <- getPlayerChoice playerEnergy
+  bossChoice <- randomRIO difficulty
+  let currentCards = [if playerEnergy < 20 then 0 else playerCards !! (choice - 1), bossChoice]
 
-  -- REMOVENDO CARTA DO DECK (ZERANDO A CARTA)
-  let playerCardsNew = [if i == (choice - 1) then 0 else x | (x, i) <- zip playerCards [0 ..]]
-  let bossCardsNew = [if i == (bossChoice - 1) then 0 else x | (x, i) <- zip bossCards [0 ..]]
+  -- REMOVENDO CARTA DO DECK (ZERANDO A CARTA) E PEGANDO DUAS CARTAS caso forem duas zerada
+  -- também pode descansar com uma zerada
+  let playerCardsZero = [if i == (choice - 1) then 0 else x | (x, i) <- zip playerCards [0 ..]]
+  randomNumber <- randomRIO (2, 12)
+  let count = length [x | x <- playerCardsZero, x == 0]
+  let playerCardsNew = [if x == 0 && count > 1 then randomNumber else x | x <- playerCardsZero]
 
   -- DANO (SE CARTAS SÃO IGUAIS, AMBOS LEVAM DANO)
   let bossLifeNew = if head currentCards >= currentCards !! 1 then bossLife - head currentCards else bossLife
@@ -54,6 +63,8 @@ battle BattleState {playerColors, playerLife, playerEnergy, bossLife, boss, play
   -- não permite passar de energia 100
   let playerEnergyNew = if head currentCards == 0 then minimum [playerEnergy + (25 + 5), 100] else minimum [playerEnergy + (-20 + 5), 100]
 
+  clearScreen
+  mapM_ putStr (makeBattlefield playerColors (playerLife, playerEnergy) bossLife boss playerCardsZero currentCards)
   delay
   if bossLifeNew <= 0 || playerLifeNew <= 0
     then do
@@ -65,4 +76,4 @@ battle BattleState {playerColors, playerLife, playerEnergy, bossLife, boss, play
           printTextScreen ["voce perdeu"]
           delay
           exitSuccess
-    else battle BattleState {playerColors, playerLife = playerLifeNew, playerEnergy = playerEnergyNew, bossLife = bossLifeNew, boss, playerCards = playerCardsNew, currentCards, bossCards = bossCardsNew}
+    else battle BattleState {playerColors, playerLife = playerLifeNew, playerEnergy = playerEnergyNew, bossLife = bossLifeNew, boss, playerCards = playerCardsNew, currentCards, difficulty}

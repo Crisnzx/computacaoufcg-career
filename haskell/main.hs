@@ -13,13 +13,13 @@ main = do
   let state =
         BattleState
           { playerColors = ["yellow", "lightyellow", "blue", "green", "magenta"],
-            playerLife = 20,
+            playerLife = 100,
             playerEnergy = 100,
-            bossLife = 20,
+            bossLife = 100,
             boss = "admBoss",
-            playerCards = [6, 7, 5, 7, 8],
+            playerCards = [0, 0, 0, 0, 0],
             currentCards = [0, 0],
-            bossCards = [2, 2, 3, 2, 2]
+            difficulty = (1, 5)
           }
   battle state
 
@@ -28,13 +28,13 @@ main = do
   let state =
         BattleState
           { playerColors = ["yellow", "lightyellow", "blue", "green", "magenta"],
-            playerLife = 20,
+            playerLife = 100,
             playerEnergy = 100,
-            bossLife = 20,
+            bossLife = 100,
             boss = "p1Boss",
-            playerCards = [6, 7, 5, 7, 8],
+            playerCards = [0, 0, 0, 0, 0],
             currentCards = [0, 0],
-            bossCards = [5, 6, 5, 5, 6]
+            difficulty = (3, 7)
           }
   battle state
 
@@ -43,13 +43,13 @@ main = do
   let state =
         BattleState
           { playerColors = ["yellow", "lightyellow", "blue", "green", "magenta"],
-            playerLife = 20,
+            playerLife = 100,
             playerEnergy = 100,
-            bossLife = 20,
+            bossLife = 100,
             boss = "p2Boss",
-            playerCards = [6, 7, 5, 7, 8],
+            playerCards = [0, 0, 0, 0, 0],
             currentCards = [0, 0],
-            bossCards = [7, 8, 8, 7, 7]
+            difficulty = (3, 8)
           }
   battle state
 
@@ -58,13 +58,13 @@ main = do
   let state =
         BattleState
           { playerColors = ["yellow", "lightyellow", "blue", "green", "magenta"],
-            playerLife = 20,
+            playerLife = 100,
             playerEnergy = 100,
-            bossLife = 20,
+            bossLife = 100,
             boss = "edaBoss",
-            playerCards = [6, 7, 5, 7, 8],
+            playerCards = [0, 0, 0, 0, 0],
             currentCards = [0, 0],
-            bossCards = [9, 10, 9, 8, 10]
+            difficulty = (4, 10)
           }
   battle state
 
@@ -73,13 +73,13 @@ main = do
   let state =
         BattleState
           { playerColors = ["yellow", "lightyellow", "blue", "green", "magenta"],
-            playerLife = 20,
+            playerLife = 100,
             playerEnergy = 100,
-            bossLife = 20,
+            bossLife = 100,
             boss = "plpBoss",
-            playerCards = [6, 7, 5, 7, 8],
+            playerCards = [0, 0, 0, 0, 0],
             currentCards = [0, 0],
-            bossCards = [11, 13, 11, 11, 13]
+            difficulty = (6, 10)
           }
   battle state
 
