@@ -66,6 +66,10 @@ battle BattleState {playerColors, playerLife, playerEnergy, bossLife, boss, play
   let playerEnergyNew = if head currentCards == 0 then minimum [playerEnergy + (25 + 5), 100] else minimum [playerEnergy + (-20 + 5), 100]
 
   clearScreen
+  mapM_ putStr (makeBattlefield playerColors (playerLife, playerEnergy) bossLife boss playerCardsZero [currentCards !! 0, 0])
+  delay
+
+  clearScreen
   mapM_ putStr (makeBattlefield playerColors (playerLife, playerEnergy) bossLife boss playerCardsZero currentCards)
   delay
   if bossLifeNew <= 0 || playerLifeNew <= 0
@@ -78,4 +82,4 @@ battle BattleState {playerColors, playerLife, playerEnergy, bossLife, boss, play
           printTextScreen ["voce perdeu"]
           delay
           exitSuccess
-    else battle BattleState {playerColors, playerLife = playerLifeNew, playerEnergy = playerEnergyNew, bossLife = bossLifeNew, boss, playerCards = playerCardsNew, currentCards, difficulty}
+    else battle BattleState {playerColors, playerLife = playerLifeNew, playerEnergy = playerEnergyNew, bossLife = bossLifeNew, boss, playerCards = playerCardsNew, currentCards = [0,0], difficulty}
