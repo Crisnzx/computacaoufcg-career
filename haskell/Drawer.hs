@@ -4,10 +4,10 @@ import Sprites
 -- Full screen builders
 
 -- Receives the battle params and returns the list of strings that will be printed
-makeBattlefield:: [String] -> (Int, Int) -> Int -> String -> [Int] -> [Int] -> [String]
-makeBattlefield playerColors (playerLife, playerEnergy) bossLife boss playerCards currentCards =
+makeBattlefield:: [String] -> (Int, Int) -> (Int, Int) -> String -> [Int] -> [Int] -> [String]
+makeBattlefield playerColors (playerLife, playerEnergy) (bossLife, bossEnergy) boss playerCards currentCards =
   [cycleChar "░░" 98 ++ "\n"] ++
-  makeHealthBarLines [(playerLife, playerEnergy), (bossLife, 100)] (cycleChar "░░" 22) ++
+  makeHealthBarLines [(playerLife, playerEnergy), (bossLife, bossEnergy)] (cycleChar "░░" 22) ++
   [cycleChar "░░" 98 ++ "\n"] ++
   makeCharacterLines ["mainCharacter", boss] playerColors (cycleChar "░░" 40) ++
   [cycleChar "░░" 98 ++ "\n"] ++
