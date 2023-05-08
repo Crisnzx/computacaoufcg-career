@@ -27,9 +27,9 @@ getPlayerChoice energy = do
   case readMaybe choice of
     Just n
       | n >= 1 && n <= 5 -> return n
-      | otherwise -> do
-          printf "Escolha inválida\n"
-          getPlayerChoice energy
+    _ -> do
+      printf "Escolha inválida\n"
+      getPlayerChoice energy
 
 battle :: BattleState -> IO ()
 battle BattleState {playerColors, playerLife, playerEnergy, bossLife, bossEnergy, boss, playerCards, currentCards, difficulty} = do
