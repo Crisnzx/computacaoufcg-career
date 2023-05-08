@@ -5,66 +5,121 @@ import IOHelpers
 fubicaStory:: IO()
 fubicaStory = do
   printTextScreen [
-    "antes de iniciar o primeiro periodo",
-    "precisamos conhecer",
-    "",
-    "o coordenador fubica..."
+    "saudacoes, estudante!",
+    "o seu primeiro desafio sera derrotar",
+    "o temido coordenador fubica",
+    "no periodo de matriculas ele vira",
+    "uma fera, para evitar isso voce deve",
+    "ler o guia com muita atencao.",
+    "portanto, caso queira continuar vivo",
+    "nao mande emails com perguntas ja",
+    "respondidas no guia. eh serio."
     ]
   onEnterContinue
-  printTextScreen [
-    "criar uma historia sobre a necessidade de ler o guia",
-    "apos isso a batalha contra fubica comeca"
-    ]
 
 daltonStory:: IO()
 daltonStory = do
   printTextScreen [
-    "agora no primeiro periodo voce vai pagar p1 com dalton",
-    "",
-    "",
-    "dalton vai lhe ensinar algoritmos em python"
+    "apos derrotar fubica e se matricular",
+    "nas cadeiras do p1, voce lutara com",
+    "o lendario e grande professor dalton",
+    "também conhecido como rei do python.",
+    "nao se assuste, voce tem uma chance",
+    "de derrota-lo, nao desperdice-a.",
+    "voce tem sorte que nem wilkerson e",
+    "nem jorge estao nessa batalha."
     ]
   onEnterContinue
   printTextScreen [
-    "criar uma historia sobre p1 no primeiro periodo",
-    "apos isso a batalha contra dalton comeca"
+    "eh bom voce lembrar que p1 e lp1 sao",
+    "cadeiras muito importantes, preste",
+    "muita atencao nas aulas e se dedique",
+    "muito. responda muitas questoes do",
+    "site da cadeira e abuse do tst.",
+    "p1 eh apenas a porta para o mundo da",
+    "programacao no nosso curso, voce",
+    "ainda vera muitas coisas legais.",
+    "mas chega de papo, hora de lutar!!!"
     ]
+  onEnterContinue
 
 gaudencioStory:: IO()
 gaudencioStory = do
   printTextScreen [
-    "parabens por ter sido aprovado em p1!",
-    "",
-    "agora voce ira aprender programacao orientada a objetos em java"
+    "parabens, voce conseguiu pagar p1!",
+    "foi dificil derrotar dalton? hehehe.",
+    "agora voce ira aprender programacao",
+    "orientada a objetos em java. parece",
+    "assustador, neh? mas eh bem legal.",
+    "o grande boss daqui eh gaudencio,",
+    "voce nao vai querer deixa-lo com",
+    "raiva, use o modeligado para fazer",
+    "seus diagramas de classe e estude mt."
     ]
   onEnterContinue
   printTextScreen [
-    "criar uma historia sobre p2 no segundo periodo",
-    "apos isso a batalha contra gaudencio comeca"
+    "depois voce vai aprender mais sobre,",
+    "mas POO eh apenas um dos varios",
+    "paradigmas das linguagens que usamos",
+    "para programar. esse paradigma eh",
+    "usado em varios contextos.",
+    "portanto, entenda-o bem e se prepare",
+    "para colocar a mao na massa nessa",
+    "cadeira, faca todos os labs e voce",
+    "se dara bem. agora... hora de lutar!!!"
     ]
+  onEnterContinue
 
 jaStory:: IO()
 jaStory = do
   printTextScreen [
-    "agora voce vai aprender estrutura de dados com joao artur",
-    "",
-    "aproveite o material online que ele produziu pois vai lhe ajudar bastante"
+    "Eaii, gostou de POO? eh massa, neh?",
+    "voce aprende muitas coisas em p2",
+    "deve ter sido sensacional pra voce!!",
+    "contudo, agora voce esta prestes a",
+    "enfrentar o grande joao arthur, rei",
+    "de todas estruturas de dados ja",
+    "descobertas no mundo da computacao.",
+    "mas nao se assuste, voce tem muito",
+    "a aprender."
     ]
   onEnterContinue
   printTextScreen [
-    "criar uma historia sobre eda no terceiro periodo",
-    "apos isso a batalha contra joao artur comeca"
+    "voce nunca se perguntou como um",
+    "array ou como uma lista funcionam?",
+    "tudo isso voce aprendera aqui. e sao",
+    "coisas muito importantes, preste",
+    "muita atencao nas aulas e use todo",
+    "o material que joao arthur libera",
+    "no github dele para voce estudar, la",
+    "o assunto esta muito bem detalhado.",
+    "entao... boa sorte nessa luta!!!"
     ]
+  onEnterContinue
 
 evertonStory:: IO()
 evertonStory = do
   printTextScreen [
-    "show, chegou a hora de aprender outros paradigmas alem do orientado a objetos e o imperativo",
-    "e hora de aprender com o professor everton dois novos paradigmas",
-    "funcional e logico"
+    "voce esta indo muito bem, mas agora",
+    "chegou o momento de aprender mais",
+    "dois paradigmas das linguagens de",
+    "programacao. o funcional e o logico.",
+    "voce vai aprender que nem tudo no",
+    "mundo eh POO! e everton, o grande, o",
+    "ajudara nessa jornada, voce precisa",
+    "prestar muita atencao na aula, sao",
+    "muitos conceitos novos a aprender."
     ]
   onEnterContinue
   printTextScreen [
-    "criar uma historia sobre plp no quarto periodo",
-    "apos isso a batalha contra everton comeca"
+    "voce tera que aprender duas novas",
+    "linguagens de programacao nessa nova",
+    "cadeira, haskell e prolog. vai ser",
+    "puxado, mas vale a pena. faca os",
+    "roteiros semanais das linguagens",
+    "e responda muitas questoes desses",
+    "paradigmas novos para fixar o",
+    "conteudo. derrotar everton nao eh",
+    "tarefa facil... boa sorte na luta!!!"
     ]
+  onEnterContinue
