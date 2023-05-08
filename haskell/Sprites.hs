@@ -50,6 +50,19 @@ paintSpritePixels (head : tail) color char =
 paintString :: String -> String -> String
 paintString color content = getColorPrefix color ++ content ++ getColorPrefix "default"
 
+getColor :: String -> String
+getColor "1" = "black"
+getColor "2" = "gray"
+getColor "1" = "red"
+getColor "1" = "green"
+getColor "1" = ""
+getColor "1" = "azul"
+getColor "1" = "magenta"
+getColor "1" = "ciano"
+getColor "1" = "branco"
+getColor "1" = "preto"
+getColor "1" = "preto"
+
 getColorPrefix :: String -> String
 getColorPrefix "black" = "\ESC[30m"
 getColorPrefix "red" = "\ESC[31m"
