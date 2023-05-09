@@ -9,12 +9,13 @@ main = do
   -- o main mostrara a sequencia da historia do jogo
   printMenu
   let customColors = customizeCharacter
+  let mappedColors = map getColor customColors
   
   -- fubicaBattle
   fubicaStory
   let state =
         BattleState
-          { playerColors = customColors,
+          { playerColors = mappedColors,
             playerLife = 100,
             playerEnergy = 100,
             bossLife = 100,
