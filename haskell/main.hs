@@ -7,12 +7,14 @@ main :: IO ()
 main = do
   -- o main mostrara a sequencia da historia do jogo
   printMenu
+  customColors <- customizeCharacter
+  let mappedColors = map getColor customColors
 
   -- fubicaBattle
   fubicaStory
   let state =
         BattleState
-          { playerColors = ["yellow", "lightyellow", "blue", "green", "magenta"],
+          { playerColors = mappedColors,
             playerLife = 100,
             playerEnergy = 100,
             bossLife = 100,
@@ -24,11 +26,11 @@ main = do
           }
   battle state
 
-  -- daltonBattle
+  -- daltonBattle ["yellow", "lightyellow", "blue", "green", "magenta"]
   daltonStory
   let state =
         BattleState
-          { playerColors = ["yellow", "lightyellow", "blue", "green", "magenta"],
+          { playerColors = mappedColors,
             playerLife = 100,
             playerEnergy = 100,
             bossLife = 100,
@@ -44,7 +46,7 @@ main = do
   gaudencioStory
   let state =
         BattleState
-          { playerColors = ["yellow", "lightyellow", "blue", "green", "magenta"],
+          { playerColors = mappedColors,
             playerLife = 100,
             playerEnergy = 100,
             bossLife = 100,
@@ -60,7 +62,7 @@ main = do
   jaStory
   let state =
         BattleState
-          { playerColors = ["yellow", "lightyellow", "blue", "green", "magenta"],
+          { playerColors = mappedColors,
             playerLife = 100,
             playerEnergy = 100,
             bossLife = 100,
@@ -76,7 +78,7 @@ main = do
   evertonStory
   let state =
         BattleState
-          { playerColors = ["yellow", "lightyellow", "blue", "green", "magenta"],
+          { playerColors = mappedColors,
             playerLife = 100,
             playerEnergy = 100,
             bossLife = 100,
