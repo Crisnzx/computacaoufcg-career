@@ -4,6 +4,9 @@ import IOHelpers
 
 fubicaStory:: IO()
 fubicaStory = do
+  printTextScreen ["parabens! voce foi aprovado no curso de computacao da ufcg no sisu 2023.1", "aproveite ao maximo toda experiencia", "proporcionada no curso", "dessa forma temos certeza que", "voce se tornara", "um grande cientista da computacao", "com uma qualificacao altamente acima da media do mercado!!"]
+  onEnterContinue
+
   printTextScreen [
     "antes de iniciar o primeiro periodo",
     "precisamos conhecer",

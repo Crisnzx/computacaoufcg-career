@@ -8,9 +8,9 @@ main = do
   mapM_ putStr (makeBattlefield ["yellow", "lightyellow", "blue", "green", "magenta"] (25, 80) 4 "p2Boss" [2, 13, 9, 1, 6] [13, 9])
   -- o main mostrara a sequencia da historia do jogo
   printMenu
-  let customColors = customizeCharacter
+  customColors <- customizeCharacter
   let mappedColors = map getColor customColors
-  
+
   -- fubicaBattle
   fubicaStory
   let state =
@@ -26,11 +26,11 @@ main = do
           }
   battle state
 
-  -- daltonBattle
+  -- daltonBattle ["yellow", "lightyellow", "blue", "green", "magenta"]
   daltonStory
   let state =
         BattleState
-          { playerColors = ["yellow", "lightyellow", "blue", "green", "magenta"],
+          { playerColors = mappedColors,
             playerLife = 100,
             playerEnergy = 100,
             bossLife = 100,
@@ -45,7 +45,7 @@ main = do
   gaudencioStory
   let state =
         BattleState
-          { playerColors = ["yellow", "lightyellow", "blue", "green", "magenta"],
+          { playerColors = mappedColors,
             playerLife = 100,
             playerEnergy = 100,
             bossLife = 100,
@@ -60,7 +60,7 @@ main = do
   jaStory
   let state =
         BattleState
-          { playerColors = ["yellow", "lightyellow", "blue", "green", "magenta"],
+          { playerColors = mappedColors,
             playerLife = 100,
             playerEnergy = 100,
             bossLife = 100,
@@ -75,7 +75,7 @@ main = do
   evertonStory
   let state =
         BattleState
-          { playerColors = ["yellow", "lightyellow", "blue", "green", "magenta"],
+          { playerColors = mappedColors,
             playerLife = 100,
             playerEnergy = 100,
             bossLife = 100,

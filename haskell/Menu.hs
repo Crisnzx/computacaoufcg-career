@@ -14,23 +14,24 @@ printMenu = do
 customizedColors:: [String] -> [String]
 customizedColors colors = colors
 
-getColor :: String -> String
-getColor "1" = "black"
-getColor "2" = "gray"
-getColor "3" = "red"
-getColor "4" = "green"
-getColor "5" = "yellow"
-getColor "6" = "blue"
-getColor "7" = "magenta"
-getColor "8" = "cyan"
-getColor "9" = "white"
-getColor "10" = "lightgray"
-getColor "11" = "lightred"
-getColor "12" = "lightgreen"
-getColor "13" = "lightyellow"
-getColor "14" = "lightblue"
-getColor "15" = "lightmagenta"
-getColor "16" = "lightcyan"
+getColor :: Int -> String
+getColor 1 = "black"
+getColor 2 = "gray"
+getColor 3 = "red"
+getColor 4 = "green"
+getColor 5 = "yellow"
+getColor 6 = "blue"
+getColor 7 = "magenta"
+getColor 8 = "cyan"
+getColor 9 = "white"
+getColor 10 = "lightgray"
+getColor 11 = "lightred"
+getColor 12 = "lightgreen"
+getColor 13 = "lightyellow"
+getColor 14 = "lightblue"
+getColor 15 = "lightmagenta"
+getColor 16 = "lightcyan"
+getColor x = "gray"
 
 onChosenOption:: Int -> IO()
 onChosenOption 1 = startGame
@@ -44,7 +45,7 @@ onChosenOption invalidOption = do
 
 startGame:: IO ()
 startGame = do
-  printTextScreen ["parabens! voce foi aprovado no curso de computacao da ufcg no sisu 2023.1", "aproveite ao maximo toda experiencia", "proporcionada no curso", "dessa forma temos certeza que", "voce se tornara", "um grande cientista da computacao", "com uma qualificacao altamente acima da media do mercado!!"]
+  printTextScreen ["antes de iniciar o jogo", "-- customize seu personagem --"]
   onEnterContinue
 
 openTutorial:: IO()
@@ -54,7 +55,7 @@ openTutorial = do
   printTextScreen ["mais uma linha do tutorial do jogo"]
   onEnterGoBackToMenu
 
-customizeCharacter:: IO [String]
+customizeCharacter:: IO [Int]
 customizeCharacter = do
   printTextScreen [
     "escolha a cor do cabelo",
@@ -67,7 +68,7 @@ customizeCharacter = do
     "7- magenta        15- magenta claro",
     "8- ciano          16- ciano claro"
     ]
-  line1 <- getLine
+  line1 <- readLn :: IO Int
   printTextScreen [
     "escolha a cor da pele",
     "1- preto           9- branco",
@@ -79,7 +80,7 @@ customizeCharacter = do
     "7- magenta        15- magenta claro",
     "8- ciano          16- ciano claro"
     ]
-  line2 <- getLine
+  line2 <- readLn :: IO Int
   printTextScreen [
     "escolha a cor da camisa",
     "1- preto           9- branco",
@@ -91,9 +92,9 @@ customizeCharacter = do
     "7- magenta        15- magenta claro",
     "8- ciano          16- ciano claro"
     ]
-  line3 <- getLine
+  line3 <- readLn :: IO Int
   printTextScreen [
-    "escolha a cor da calça",
+    "escolha a cor do short",
     "1- preto           9- branco",
     "2- cinza          10- cinza claro",
     "3- vermelho       11- vermelho claro",
@@ -103,7 +104,7 @@ customizeCharacter = do
     "7- magenta        15- magenta claro",
     "8- ciano          16- ciano claro"
     ]
-  line4 <- getLine
+  line4 <- readLn :: IO Int
   printTextScreen [
     "escolha a cor do tenis",
     "1- preto           9- branco",
@@ -115,7 +116,7 @@ customizeCharacter = do
     "7- magenta        15- magenta claro",
     "8- ciano          16- ciano claro"
     ]
-  line5 <- getLine
+  line5 <- readLn :: IO Int
   let colorList = [line1, line2, line3, line4, line5]
   return colorList
   
