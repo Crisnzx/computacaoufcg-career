@@ -53,10 +53,10 @@ openTutorial = do
   printTextScreen [
     "tutorial - gameplay",
     "",
-    "a cada rodada, 2 cartas sao jogadas",
+    "a cada rodada, 2 cartas sao jogadas:",
     "uma por voce e uma pelo boss",
     "ganha a carta de maior valor,", 
-    "causando dano no oponente",
+    "causando dano no oponente.",
     "em caso de empate, ambos tomam dano"
      ]
   onEnterContinue
@@ -92,7 +92,7 @@ openTutorial = do
 customizeCharacter:: IO [Int]
 customizeCharacter = do
   printTextScreen [
-    "escolha a cor do cabelo",
+    "escolha a cor do cabelo:",
     "1- preto           9- branco",
     "2- cinza          10- cinza claro",
     "3- vermelho       11- vermelho claro",
@@ -104,7 +104,7 @@ customizeCharacter = do
     ]
   line1 <- readLn :: IO Int
   printTextScreen [
-    "escolha a cor da pele",
+    "escolha a cor da pele:",
     "1- preto           9- branco",
     "2- cinza          10- cinza claro",
     "3- vermelho       11- vermelho claro",
@@ -116,7 +116,7 @@ customizeCharacter = do
     ]
   line2 <- readLn :: IO Int
   printTextScreen [
-    "escolha a cor da camisa",
+    "escolha a cor da camisa:",
     "1- preto           9- branco",
     "2- cinza          10- cinza claro",
     "3- vermelho       11- vermelho claro",
@@ -128,7 +128,7 @@ customizeCharacter = do
     ]
   line3 <- readLn :: IO Int
   printTextScreen [
-    "escolha a cor do short",
+    "escolha a cor do short:",
     "1- preto           9- branco",
     "2- cinza          10- cinza claro",
     "3- vermelho       11- vermelho claro",
@@ -140,7 +140,7 @@ customizeCharacter = do
     ]
   line4 <- readLn :: IO Int
   printTextScreen [
-    "escolha a cor do tenis",
+    "escolha a cor do tenis:",
     "1- preto           9- branco",
     "2- cinza          10- cinza claro",
     "3- vermelho       11- vermelho claro",
