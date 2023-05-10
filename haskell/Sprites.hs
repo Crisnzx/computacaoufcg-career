@@ -515,7 +515,7 @@ getCharSprite 'e' = unlines [
   "▀▄▄▄"
   ]
 getCharSprite 'f' = unlines [
-  "█▀▀▀",
+  "▄▀▀▀",
   "█■■ ",
   "█   "
   ]
@@ -547,7 +547,7 @@ getCharSprite 'k' = unlines [
 getCharSprite 'l' = unlines [
   "█   ",
   "█   ",
-  "█▄▄▄"
+  "▀▄▄▄"
   ]
 getCharSprite 'm' = unlines [
   "█▄▄█",
@@ -592,7 +592,7 @@ getCharSprite 't' = unlines [
 getCharSprite 'u' = unlines [
   "█  █",
   "█  █",
-  "█▄▄█"
+  "▀▄▄▀"
   ]
 getCharSprite 'v' = unlines [
   "█  █",
