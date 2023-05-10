@@ -45,14 +45,48 @@ onChosenOption invalidOption = do
 
 startGame:: IO ()
 startGame = do
-  printTextScreen ["antes de iniciar o jogo", "-- customize seu personagem --"]
+  printTextScreen ["--antes de iniciar o jogo--", "-- customize seu personagem --"]
   onEnterContinue
 
 openTutorial:: IO()
 openTutorial = do
-  printTextScreen ["tutorial do jogo..."]
+  printTextScreen [
+    "tutorial - gameplay",
+    "",
+    "a cada rodada, 2 cartas sao jogadas",
+    "uma por voce e uma pelo boss",
+    "ganha a carta de maior valor,", 
+    "causando dano no oponente",
+    "em caso de empate, ambos tomam dano"
+     ]
   onEnterContinue
-  printTextScreen ["mais uma linha do tutorial do jogo"]
+  printTextScreen [
+    "tutorial - cartas",
+    "",
+    "as cartas variam de as ate rei",
+    "e causam respectivamente 1 a 13", 
+    "de dano",
+    "todas as cartas custam energia para",
+    "serem jogadas"
+     ]
+  onEnterContinue
+  printTextScreen [
+    "tutorial - energia",
+    "",
+    "a energia eh utilizada para jogar as cartas.",
+    "a cada round, um pouco de energia eh restaurada",
+    "voce tambem pode selecionar o numero correspondente a uma carta vazia paradescansar e restaurar mais energia"
+    ]
+  onEnterContinue
+  printTextScreen [
+    "tutorial - energia",
+    "",
+    "caso a energia nao seja suficiente", 
+    "para jogar a carta",
+    "voce descansara automaticamente e ",
+    "perdera a carta jogada",
+    "preste atencao!"
+    ]
   onEnterGoBackToMenu
 
 customizeCharacter:: IO [Int]

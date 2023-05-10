@@ -1,4 +1,4 @@
-module Stories (fubicaStory, gaudencioStory, daltonStory, jaStory, evertonStory) where
+module Stories (fubicaStory, gaudencioStory, daltonStory, jaStory, evertonStory, endGame) where
 import Drawer
 import IOHelpers
 
@@ -26,7 +26,7 @@ daltonStory = do
     "apos derrotar fubica e se matricular",
     "nas cadeiras do p1, voce lutara com",
     "o lendario e grande professor dalton",
-    "também conhecido como rei do python.",
+    "tambem conhecido como rei do python.",
     "nao se assuste, voce tem uma chance",
     "de derrota-lo, nao desperdice-a.",
     "voce tem sorte que nem wilkerson e",
@@ -62,7 +62,7 @@ gaudencioStory = do
   onEnterContinue
   printTextScreen [
     "depois voce vai aprender mais sobre,",
-    "mas POO eh apenas um dos varios",
+    "mas poo eh apenas um dos varios",
     "paradigmas das linguagens que usamos",
     "para programar. esse paradigma eh",
     "usado em varios contextos.",
@@ -76,7 +76,7 @@ gaudencioStory = do
 jaStory:: IO()
 jaStory = do
   printTextScreen [
-    "Eaii, gostou de POO? eh massa, neh?",
+    "eaii, gostou de poo? eh massa, neh?",
     "voce aprende muitas coisas em p2",
     "deve ter sido sensacional pra voce!!",
     "contudo, agora voce esta prestes a",
@@ -108,7 +108,7 @@ evertonStory = do
     "dois paradigmas das linguagens de",
     "programacao. o funcional e o logico.",
     "voce vai aprender que nem tudo no",
-    "mundo eh POO! e everton, o grande, o",
+    "mundo eh poo! e everton, o grande, o",
     "ajudara nessa jornada, voce precisa",
     "prestar muita atencao na aula, sao",
     "muitos conceitos novos a aprender."
@@ -124,5 +124,16 @@ evertonStory = do
     "paradigmas novos para fixar o",
     "conteudo. derrotar everton nao eh",
     "tarefa facil... boa sorte na luta!!!"
+    ]
+  onEnterContinue
+
+endGame:: IO()
+endGame = do 
+  printTextScreen [
+    "parabens, voce conseguiu vencer", 
+    "everton",
+    "mas nao se de por satisfeito,",
+    "seu projeto ainda precisa ser aprovado!",
+    "boa sorte com prolog!!!"
     ]
   onEnterContinue

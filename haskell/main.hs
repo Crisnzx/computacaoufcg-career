@@ -89,8 +89,7 @@ main = do
             difficulty = (6, 10)
           }
   battle state
-
--- endGame
+  endGame
 
 -- mapM_ putStr (makeText "prepare-se. o sapato eh amalero!?")
 

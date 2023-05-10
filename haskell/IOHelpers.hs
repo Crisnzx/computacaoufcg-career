@@ -19,4 +19,4 @@ onEnterContinue = do
 
 
 delay:: IO()
-delay = threadDelay (1 * 1500000) -- 1.5 segundo
+delay = threadDelay (1 * 1000000) -- 1.0 segundo

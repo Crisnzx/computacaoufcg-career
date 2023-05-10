@@ -86,10 +86,10 @@ battle BattleState {playerColors, playerLife, playerEnergy, bossLife, bossEnergy
     then do
       if bossLifeNew <= 0 && playerLifeNew > 0
         then do
-          printTextScreen ["voce derrotou o boss"]
-          delay
+          printTextScreen ["voce derrotou o boss", "", "", "", "--pressione enter para continuar--"]
+          onEnterContinue
         else do
-          printTextScreen ["voce perdeu"]
-          delay
+          printTextScreen ["voce perdeu", "", "", "", "--pressione enter para continuar--"]
+          onEnterContinue
           exitSuccess
     else battle BattleState {playerColors, playerLife = playerLifeNew, playerEnergy = playerEnergyNew, bossLife = bossLifeNew, bossEnergy = bossEnergyNew, boss, playerCards = playerCardsNew, currentCards = [0, 0], difficulty}
