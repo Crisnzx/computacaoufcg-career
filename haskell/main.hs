@@ -5,12 +5,10 @@ import Stories
 
 main :: IO ()
 main = do
-  -- o main mostrara a sequencia da historia do jogo
   printMenu
   customColors <- customizeCharacter
   let mappedColors = map getColor customColors
 
-  -- fubicaBattle
   fubicaStory
   let state =
         BattleState
@@ -26,7 +24,6 @@ main = do
           }
   battle state
 
-  -- daltonBattle ["yellow", "lightyellow", "blue", "green", "magenta"]
   daltonStory
   let state =
         BattleState
@@ -42,7 +39,6 @@ main = do
           }
   battle state
 
-  -- gaudencioBattle
   gaudencioStory
   let state =
         BattleState
@@ -58,7 +54,6 @@ main = do
           }
   battle state
 
-  -- jaBattle
   jaStory
   let state =
         BattleState
@@ -74,7 +69,6 @@ main = do
           }
   battle state
 
-  -- evertonBattle
   evertonStory
   let state =
         BattleState
@@ -90,24 +84,3 @@ main = do
           }
   battle state
   endGame
-
--- mapM_ putStr (makeText "prepare-se. o sapato eh amalero!?")
-
--- a lista de cores precisa ter tamanho 5 e as cores serão mapeadas nessa ordem: [hair, skin, tshirt, pants, boots]
--- as cores possíveis são:
--- "black"
--- "red"
--- "green"
--- "yellow"
--- "blue"
--- "magenta"
--- "cyan"
--- "white"
--- "gray"
--- "lightred"
--- "lightgreen"
--- "lightyellow"
--- "lightblue"
--- "lightmagenta"
--- "lightcyan"
--- "lightgray"
