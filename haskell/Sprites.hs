@@ -510,9 +510,9 @@ getCharSprite 'd' = unlines [
   "█▄▄▀"
   ]
 getCharSprite 'e' = unlines [
-  "█▀▀▀",
+  "▄▀▀▀",
   "█■■ ",
-  "█▄▄▄"
+  "▀▄▄▄"
   ]
 getCharSprite 'f' = unlines [
   "█▀▀▀",
