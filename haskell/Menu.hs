@@ -5,7 +5,7 @@ import System.Exit
 
 printMenu:: IO()
 printMenu = do
-  printTextScreen ["ola bem vindo ao nosso jogo", "computacao ufcg career", "", "---menu---","1-iniciar o jogo", "2-tutorial", "3-sair"]
+  printTextScreen ["", "====== computacao ufcg: career ======", "", "   1-iniciar o jogo", "   2-tutorial", "   3-sair"]
 
   chosenOption <- readLn :: IO Int
 
@@ -45,7 +45,7 @@ onChosenOption invalidOption = do
 
 startGame:: IO ()
 startGame = do
-  printTextScreen ["--antes de iniciar o jogo--", "-- customize seu personagem --"]
+  printTextScreen ["", "", "", "      antes de iniciar o jogo", "", "      customize seu personagem"]
   onEnterContinue
 
 openTutorial:: IO()
