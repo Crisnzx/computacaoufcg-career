@@ -1,11 +1,11 @@
-module Drawer (makeBattlefield, makeTextScreen) where
+module Drawer (drawBattlefield, drawTextScreen) where
 import Sprites
 
 -- Full screen builders
 
 -- Receives the battle params and returns the list of strings that will be printed
-makeBattlefield:: [String] -> (Int, Int) -> (Int, Int) -> String -> [Int] -> [Int] -> [String]
-makeBattlefield playerColors (playerLife, playerEnergy) (bossLife, bossEnergy) boss playerCards currentCards =
+drawBattlefield:: [String] -> (Int, Int) -> (Int, Int) -> String -> [Int] -> [Int] -> [String]
+drawBattlefield playerColors (playerLife, playerEnergy) (bossLife, bossEnergy) boss playerCards currentCards =
   [cycleChar "░░" 98 ++ "\n"] ++
   makeHealthBarLines [(playerLife, playerEnergy), (bossLife, bossEnergy)] (cycleChar "░░" 22) ++
   [cycleChar "░░" 98 ++ "\n"] ++
@@ -39,11 +39,11 @@ makeCardLines playerCards currentCards spacer =
 
 
 -- Receives a String, converts it to the respective sprites and builds a screen with it
-makeTextScreen:: [String] -> [String]
-makeTextScreen texts = 
+drawTextScreen:: [String] -> [String]
+drawTextScreen texts = 
     [cycleChar "██" 98 ++ "\n"] ++
     getBorderSpacer "░░" ++
-    (flatten (map (\text -> makeTextLines ("(" ++ text ++ ")") ++ getBorderSpacer " " ++ getBorderSpacer " ") (makeTextScreenContent texts))) ++
+    (flatten (map (\text -> makeTextLines ("(" ++ text ++ ")") ++ getBorderSpacer " " ++ getBorderSpacer " ") (drawTextScreenContent texts))) ++
     getBorderSpacer "░░" ++
     getBorderSpacer "░░" ++
     [cycleChar "██" 98 ++ "\n"]
@@ -62,8 +62,8 @@ makeTextLines text =
     let sprites = map (\char -> getCharSprite char) (take 40 (text ++ cycle " "))
     in (concatLines (map (\sprite -> lines sprite) sprites) 0 " ")
 
-makeTextScreenContent :: [String] -> [String]
-makeTextScreenContent content = splitLines (handleBreakLines (unlines content) 0) 0
+drawTextScreenContent :: [String] -> [String]
+drawTextScreenContent content = splitLines (handleBreakLines (unlines content) 0) 0
 
 splitLines :: String -> Int -> [String]
 splitLines content 9 = []

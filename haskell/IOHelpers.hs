@@ -9,7 +9,7 @@ clearScreen = callCommand "clear"
 printTextScreen:: [String] -> IO()
 printTextScreen texts = do
   clearScreen
-  mapM_ putStr (makeTextScreen texts)
+  mapM_ putStr (drawTextScreen texts)
 
 onEnterContinue:: IO()
 onEnterContinue = do
