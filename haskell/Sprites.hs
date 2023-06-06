@@ -155,22 +155,6 @@ getCharacterSprite "p1Boss" _ = paintCharacter (unlines [
   "██████████████████░░░░░░██████████████████░░░░░░░░░░░░░░░░"
   ]) ["default", "lightgray", "gray", "default", "gray"] 0
 -- ['▓', 's', 't', 'p', 'b']
--- "black"
--- "red"
--- "green"
--- "yellow"
--- "blue"
--- "magenta"
--- "cyan"
--- "white"
--- "gray"
--- "lightred"
--- "lightgreen"
--- "lightyellow"
--- "lightblue"
--- "lightmagenta"
--- "lightcyan"
--- "lightgray"
 
 getCharacterSprite "p2Boss" _ = paintCharacter (unlines [
   "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░",

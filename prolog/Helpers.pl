@@ -1,4 +1,4 @@
-:- module(Helpers, [concatenate/2, getElementByIndex/3, stringToCharList/2, charListToString/2]).
+:- module(Helpers, [concatenate/2, getElementByIndex/3, stringToCharList/2, charListToString/2, unlines/2]).
 
 concatenate([], '').
 concatenate([X], X).
@@ -21,3 +21,5 @@ stringToCharList(String, Result) :-
   Result = [First | R2], !.
 
 charListToString(List, Result) :- concatenate(List, Result).
+
+unlines(Strings, Result) :- atomic_list_concat(Strings, '\n', Result). 
