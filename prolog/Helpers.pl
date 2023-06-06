@@ -4,8 +4,8 @@ concatenate([], '').
 concatenate([X], X).
 concatenate([X, Y], Result) :- atom_concat(X, Y, Result).
 concatenate([Head|Tail], Result) :-
-  concatenate(Tail, R2),
-  atom_concat(Head, R2, Result),!.
+  concatenate(Tail, R2), !,
+  atom_concat(Head, R2, Result).
 
 getElementByIndex([X|_], 0, X).
 getElementByIndex([_|Tail], Index, Element) :-
@@ -13,13 +13,10 @@ getElementByIndex([_|Tail], Index, Element) :-
   NewIndex is Index - 1,
   getElementByIndex(Tail, NewIndex, Element).
 
-stringToCharList("", []).
-stringToCharList(String, Result) :- 
-  sub_string(String, 0, 1, _, First),
-  sub_string(String, 1, _, 0, Rest),
-  stringToCharList(Rest, R2),
-  Result = [First | R2], !.
+stringToCharList(String, Result) :-
+  string_chars(String, Result).
 
-charListToString(List, Result) :- concatenate(List, Result).
+charListToString(CharList, Result) :- 
+  string_chars(Result, CharList).
 
 unlines(Strings, Result) :- atomic_list_concat(Strings, '\n', Result). 

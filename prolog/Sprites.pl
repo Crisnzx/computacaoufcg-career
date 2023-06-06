@@ -4,27 +4,28 @@ sourceColorChars(["▓", "s", "t", "p", "b"]).
 paintCharacter(CharacterSprite, [Head | _], 4, Result) :- 
     sourceColorChars(ColorCharsList),
     getElementByIndex(ColorCharsList, 4, ColorChar),
-    paintSpritePixels(CharacterSprite, Head, ColorChar, R2), !,
-    paintSpritePixels(R2, "white", "▒", Result), !.
+    paintSpritePixels(CharacterSprite, Head, ColorChar, R2),
+    paintSpritePixels(R2, "white", "▒", Result).
 
 paintCharacter(CharacterSprite, [Head | Tail], CharIndex, Result) :- 
     sourceColorChars(ColorCharsList),
     getElementByIndex(ColorCharsList, CharIndex, ColorChar),
-    paintSpritePixels(CharacterSprite, Head, ColorChar, R2), !,
+    paintSpritePixels(CharacterSprite, Head, ColorChar, R2),
     CharIndexInc is CharIndex + 1,
-    paintCharacter(R2, Tail, CharIndexInc, Result), !.
+    paintCharacter(R2, Tail, CharIndexInc, Result).
 
+paintSpritePixels([], _, _, Result) :- Result = "", !.
 paintSpritePixels('', _, _, Result) :- Result = "", !.
 paintSpritePixels(Sprite, Color, Char, Result) :-
     stringToCharList(Sprite, [Head | Tail]),
-    charListToString(Tail, TailString),
-    (Head = Char -> (
+    charListToString(TailString, Tail),
+    (atom_chars(Head, Char) -> (
         paintString(Color, "▓", R2),
         paintSpritePixels(TailString, Color, Char, R3),
-        concatenate([R2, R3], Result), !
+        concatenate([R2, R3], Result)
         ) 
-    ; paintSpritePixels(TailString, Color, Char, R2),
-      concatenate([Head, R2], Result), !
+    ;   paintSpritePixels(TailString, Color, Char, R2),
+        concatenate([Head, R2], Result)
     ).
 
 paintString(_, "", "").
@@ -54,6 +55,7 @@ getColorPrefix("lightgray", "\e[97m").
 getColorPrefix("default", "\e[0m").
 
 % [hair, skin, tshirt, pants, boots]
+% getCharacterSprite("mainCharacter", ["red", "blue", "yellow", "magenta", "green"], Result)
 
 getCharacterSprite("mainCharacter", ColorList, Result) :- 
     unlines([
