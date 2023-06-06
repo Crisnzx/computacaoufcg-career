@@ -26,4 +26,4 @@ cycleChar(_, 0, Result) :- Result = "", !.
 cycleChar(Char, Quantity, Result) :- 
   QuantityDec is Quantity - 1,
   cycleChar(Char, QuantityDec, R2),
-  concatenate([Char, R2], Result), !.
+  concatenate([Char, Char, R2], Result), !.
