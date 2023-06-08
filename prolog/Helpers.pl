@@ -1,4 +1,4 @@
-:- module(Helpers, [concatenate/2, getElementByIndex/3, stringToCharList/2, charListToString/2, unlines/2]).
+:- module(Helpers, [concatenate/2, getElementByIndex/3, stringToCharList/2, charListToString/2, unlines/2, lines/2, map/3, cycleChar/3]).
 
 concatenate([], '').
 concatenate([X], X).
@@ -20,3 +20,15 @@ charListToString(CharList, Result) :-
   string_chars(Result, CharList).
 
 unlines(Strings, Result) :- atomic_list_concat(Strings, '\n', Result). 
+lines(String, Lines) :- atomic_list_concat(Lines, '\n', String).
+
+map([], _, []).
+map([X|Xs], Transformation, [Y|Ys]) :-
+    call(Transformation, X, Y),
+    map(Xs, Transformation, Ys).
+
+cycleChar(_, 0, Result) :- Result = "", !.
+cycleChar(Char, Quantity, Result) :- 
+  QuantityDec is Quantity - 1,
+  cycleChar(Char, QuantityDec, R2),
+  concatenate([Char, Char, R2], Result), !.

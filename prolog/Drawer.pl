@@ -21,9 +21,3 @@ concatLine([Head|Tail], LineNumber, Spacer, Result) :-
   getElementByIndex(Head, LineNumber, Element),
   concatLine(Tail, LineNumber, Spacer, R2),
   concatenate([Element, Spacer, R2], Result), !.
-
-cycleChar(_, 0, Result) :- Result = "", !.
-cycleChar(Char, Quantity, Result) :- 
-  QuantityDec is Quantity - 1,
-  cycleChar(Char, QuantityDec, R2),
-  concatenate([Char, Char, R2], Result), !.

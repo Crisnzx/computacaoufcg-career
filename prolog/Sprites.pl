@@ -1,5 +1,88 @@
 :- use_module('./Helpers.pl').
 
+
+getHealthBarSprite(Life, Energy, Result) :-
+  makeHealthBarValue(Life, LifeSprite),
+  makeHealthBarMeter(Life, Energy, HealthBarSprite),
+  append(LifeSprite, ["░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"], R1),
+  append(R1, HealthBarSprite, R2),
+  unlines(R2, Result).
+
+
+makeHealthBarValue(Life, Result) :-
+  padStart(Life, PaddedLife),
+  concatenate(["########", PaddedLife, "##"], R2),
+  makeTextLines(R2, "░░", Result), !.
+
+padStart(Life, Result) :-
+  prepareLifeValue(Life, PreparedLife),
+  lastN(PreparedLife, 3, R2),
+  charListToString(R2, Result).
+
+lastN(List, N, LastN) :-
+  length(List, Len),
+  Len >= N,
+  Len2 is Len-N,
+  length(FirstPart, Len2),
+  append(FirstPart, LastN, List),
+  length(LastN, N).
+
+prepareLifeValue(Life, Result) :-
+  concatenate(["##", Life], R2),
+  stringToCharList(R2, Result).
+
+makeHealthBarMeter(Life, Energy, Result) :-
+  LifeProportion is Life * 0.3,
+  round(LifeProportion, LifePixels),
+  getHealthBarColor(Life, LifeColor),
+  fillHealthBar(LifeColor, LifePixels, FilledLife),
+  concatenate(["░░░░░░██", FilledLife, "██░░░░░░"], R1),
+
+  EnergyProportion is Energy * 0.2,
+  round(EnergyProportion, EnergyPixels),
+  fillEnergyBar(EnergyPixels, FilledEnergy),
+  concatenate(["░░░░░░██", FilledEnergy, "██░░░░░░░░░░░░░░░░░░░░░░░░░░"], R2),
+  
+  Result = [
+    "░░░░░░░░████████████████████████████████████████████████████████████░░░░░░░░",
+    R1,
+    "░░░░░░██████████████████████████████████████████████████████████████░░░░░░░░",
+    R2,
+    "░░░░░░░░████████████████████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░"
+], !.
+
+fillHealthBar(Color, LifePixels, Result) :-
+  cycleChar("▓", LifePixels, FilledLife),
+  UnfilledLifePixels is 30-LifePixels,
+  cycleChar("░", UnfilledLifePixels, UnfilledLife),
+  paintString(Color, FilledLife, R2),
+  concatenate([R2, UnfilledLife], Result).
+
+getHealthBarColor(Life, Result) :-
+  (   Life > 50
+  ->  Result = "green"
+  ;   Life > 25
+  ->  Result = "yellow"
+  ;   Result = "red"
+  ).
+
+fillEnergyBar(Energy, Result) :-
+  cycleChar("▓", Energy, FilledEnergy),
+  Quantity is 20-Energy,
+  cycleChar("░", Quantity, UnfilledEnergy),
+  concatenate([FilledEnergy, UnfilledEnergy], EnergyBarSprite),
+  paintString("blue", EnergyBarSprite, Result).
+
+
+
+
+
+
+
+
+
+
+
 sourceColorChars(["▓", "s", "t", "p", "b"]).
 paintCharacter(CharacterSprite, [Head | _], 4, Result) :- 
     sourceColorChars(ColorCharsList),
@@ -471,283 +554,283 @@ getCardSprite(13, Result) :- unlines([
   "░░██████████████████░░"
     ], Result).
 
-getCharSprite("a", Result) :- unlines([
+getCharSprite('a', Result) :- unlines([
   "▄▀▀▄",
   "█■■█",
   "█  █"
   ], Result), !.
 
-getCharSprite("b", Result) :- unlines([
+getCharSprite('b', Result) :- unlines([
   "█▀▀▄",
   "█■■█",
   "█▄▄▀"
   ], Result), !.
 
-getCharSprite("c", Result) :- unlines([
+getCharSprite('c', Result) :- unlines([
   "▄▀▀▄",
   "█   ",
   "▀▄▄▀"
   ], Result), !.
 
-getCharSprite("d", Result) :- unlines([
+getCharSprite('d', Result) :- unlines([
   "█▀▀▄",
   "█  █",
   "█▄▄▀"
   ], Result), !.
 
-getCharSprite("e", Result) :- unlines([
+getCharSprite('e', Result) :- unlines([
   "▄▀▀▀",
   "█■■ ",
   "▀▄▄▄"
   ], Result), !.
 
-getCharSprite("f", Result) :- unlines([
+getCharSprite('f', Result) :- unlines([
   "▄▀▀▀",
   "█■■ ",
   "█   "
   ], Result), !.
 
-getCharSprite("g", Result) :- unlines([
+getCharSprite('g', Result) :- unlines([
   "▄▀▀ ",
   "█ ▀█",
   "▀▄▄▀"
   ], Result), !.
 
-getCharSprite("h", Result) :- unlines([
+getCharSprite('h', Result) :- unlines([
   "█  █",
   "█■■█",
   "█  █"
   ], Result), !.
 
-getCharSprite("i", Result) :- unlines([
+getCharSprite('i', Result) :- unlines([
   " ▐▌ ",
   " ▐▌ ",
   " ▐▌ "
   ], Result), !.
 
-getCharSprite("j", Result) :- unlines([
+getCharSprite('j', Result) :- unlines([
   "   █",
   "   █",
   "▀▄▄▀"
   ], Result), !.
 
-getCharSprite("k", Result) :- unlines([
+getCharSprite('k', Result) :- unlines([
   "█ ▄▀",
   "██  ",
   "█ ▀▄"
   ], Result), !.
 
-getCharSprite("l", Result) :- unlines([
+getCharSprite('l', Result) :- unlines([
   "█   ",
   "█   ",
   "▀▄▄▄"
   ], Result), !.
 
-getCharSprite("m", Result) :- unlines([
+getCharSprite('m', Result) :- unlines([
   "█▄▄█",
   "█▐▌█",
   "█  █"
   ], Result), !.
 
-getCharSprite("n", Result) :- unlines([
+getCharSprite('n', Result) :- unlines([
   "█▄ █",
   "█ ▀█",
   "█  █"
   ], Result), !.
 
-getCharSprite("o", Result) :- unlines([
+getCharSprite('o', Result) :- unlines([
   "▄▀▀▄",
   "█  █",
   "▀▄▄▀"
   ], Result), !.
 
-getCharSprite("p", Result) :- unlines([
+getCharSprite('p', Result) :- unlines([
   "█▀▀▄",
   "█▄▄▀",
   "█   "
   ], Result), !.
 
-getCharSprite("q", Result) :- unlines([
+getCharSprite('q', Result) :- unlines([
   "▄▀▀▄",
   "█  █",
   " ▀▀▄"
   ], Result), !.
 
-getCharSprite("r", Result) :- unlines([
+getCharSprite('r', Result) :- unlines([
   "█▀▀▄",
   "█▄▄▀",
   "█  █"
   ], Result), !.
 
-getCharSprite("s", Result) :- unlines([
+getCharSprite('s', Result) :- unlines([
   "▄▀▀▀",
   " ▀▀▄",
   "▄▄▄▀"
   ], Result), !.
 
-getCharSprite("t", Result) :- unlines([
+getCharSprite('t', Result) :- unlines([
   "▀▐▌▀",
   " ▐▌ ",
   " ▐▌ "
   ], Result), !.
 
-getCharSprite("u", Result) :- unlines([
+getCharSprite('u', Result) :- unlines([
   "█  █",
   "█  █",
   "▀▄▄▀"
   ], Result), !.
 
-getCharSprite("v", Result) :- unlines([
+getCharSprite('v', Result) :- unlines([
   "█  █",
   "▐▌▐▌",
   " ▐▌ "
   ], Result), !.
 
-getCharSprite("w", Result) :- unlines([
+getCharSprite('w', Result) :- unlines([
   "█  █",
   "█▐▌█",
   "█▀▀█"
   ], Result), !.
 
-getCharSprite("x", Result) :- unlines([
+getCharSprite('x', Result) :- unlines([
   "▀▄▄▀",
   " ▐▌ ",
   "▄▀▀▄"
   ], Result), !.
 
-getCharSprite("y", Result) :- unlines([
+getCharSprite('y', Result) :- unlines([
   "▀▄▄▀",
   " ▐▌ ",
   " ▐▌ "
   ], Result), !.
 
-getCharSprite("z", Result) :- unlines([
+getCharSprite('z', Result) :- unlines([
   "▀▀▀█",
   " ▄▀ ",
   "█▄▄▄"
   ], Result), !.
 
-getCharSprite("0", Result) :- unlines([
+getCharSprite('0', Result) :- unlines([
   "█▀▀█",
   "█▄▀█",
   "█▄▄█"
   ], Result), !.
 
-getCharSprite("1", Result) :- unlines([
+getCharSprite('1', Result) :- unlines([
   " ▄█ ",
   "  █ ",
   " ▄█▄"
   ], Result), !.
 
-getCharSprite("2", Result) :- unlines([
+getCharSprite('2', Result) :- unlines([
   "▀▀▀█",
   "█▀▀▀",
   "█▄▄▄"
   ], Result), !.
 
-getCharSprite("3", Result) :- unlines([
+getCharSprite('3', Result) :- unlines([
   "▀▀▀█",
   " ■■█",
   "▄▄▄█"
   ], Result), !.
 
-getCharSprite("4", Result) :- unlines([
+getCharSprite('4', Result) :- unlines([
   "█  █",
   "█▄▄█",
   "   █"
   ], Result), !.
 
-getCharSprite("5", Result) :- unlines([
+getCharSprite('5', Result) :- unlines([
   "█▀▀▀",
   "▀▀▀█",
   "▄▄▄█"
   ], Result), !.
 
-getCharSprite("6", Result) :- unlines([
+getCharSprite('6', Result) :- unlines([
   "█▀▀▀",
   "█▀▀█",
   "█▄▄█"
   ], Result), !.
 
-getCharSprite("7", Result) :- unlines([
+getCharSprite('7', Result) :- unlines([
   "▀▀▀█",
   "  █ ",
   " █  "
   ], Result), !.
 
-getCharSprite("8", Result) :- unlines([
+getCharSprite('8', Result) :- unlines([
   "█▀▀█",
   "█■■█",
   "█▄▄█"
   ], Result), !.
 
-getCharSprite("9", Result) :- unlines([
+getCharSprite('9', Result) :- unlines([
   "█▀▀█",
   "█▄▄█",
   "▄▄▄█"
   ], Result), !.
 
-getCharSprite(" ", Result) :- unlines([
+getCharSprite(' ', Result) :- unlines([
   "    ",
   "    ",
   "    "
   ], Result), !.
 
-getCharSprite("-", Result) :- unlines([
+getCharSprite('-', Result) :- unlines([
   "    ",
   " ■■ ",
   "    "
   ], Result), !.
 
-getCharSprite(".", Result) :- unlines([
+getCharSprite('.', Result) :- unlines([
   "    ",
   "    ",
   " ▄  "
   ], Result), !.
 
-getCharSprite(",", Result) :- unlines([
+getCharSprite(',', Result) :- unlines([
   "    ",
   "    ",
   "▄▀  "
   ], Result), !.
 
-getCharSprite("!", Result) :- unlines([
+getCharSprite('!', Result) :- unlines([
   " █  ",
   " █  ",
   " ▄  "
   ], Result), !.
 
-getCharSprite("?", Result) :- unlines([
+getCharSprite('?', Result) :- unlines([
   "▀▀▀█",
   " █▀▀",
   " ▄  "
   ], Result), !.
 
-getCharSprite(":", Result) :- unlines([
+getCharSprite(':', Result) :- unlines([
   " ▄  ",
   "    ",
   " ▀  "
   ], Result), !.
 
-getCharSprite("=", Result) :- unlines([
+getCharSprite('=', Result) :- unlines([
   " ▄▄▄",
   "    ",
   " ▀▀▀"
   ], Result), !.
 
-getCharSprite("#", Result) :- unlines([
+getCharSprite('#', Result) :- unlines([
   "░░░░",
   "░░░░",
   "░░░░"
   ], Result), !.
 
-getCharSprite("(", Result) :- unlines([
+getCharSprite('(', Result) :- unlines([
   "██░░░░",
   "██░░░░",
   "██░░░░"
   ], Result), !.
 
-getCharSprite(")", Result) :- unlines([
+getCharSprite(')', Result) :- unlines([
   "░░██",
   "░░██",
   "░░██"
@@ -759,3 +842,28 @@ getCharSprite(_, Result) :- unlines([
   "░░░░"
   ], Result).
 
+makeTextLines(Sentence, Spacer, Result) :-
+    stringToCharList(Sentence, CharList),
+    map(CharList, getCharSprite, SpriteList),
+    map(SpriteList, lines, R2),
+    concatLines(R2, 0, Spacer, Result).
+
+concatLines(Sprites, LineNumber, Spacer, Result) :-
+  getElementByIndex(Sprites, 0, Sprite),
+  length(Sprite, SpriteHeight),
+  (LineNumber < SpriteHeight ->
+    (
+      LineNumberInc is LineNumber + 1,
+      concatLine(Sprites, LineNumber, Spacer, R2),
+      concatLines(Sprites, LineNumberInc, Spacer, R3),
+      append([R2], R3, Result)
+    )
+    ; Result = []
+  ).
+
+concatLine([Head|[]], LineNumber, _, Result) :-
+  getElementByIndex(Head, LineNumber, Result).
+concatLine([Head|Tail], LineNumber, Spacer, Result) :-
+  getElementByIndex(Head, LineNumber, Element),
+  concatLine(Tail, LineNumber, Spacer, R2),
+  concatenate([Element, Spacer, R2], Result), !.
