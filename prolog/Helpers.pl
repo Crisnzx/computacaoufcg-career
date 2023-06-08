@@ -1,4 +1,4 @@
-:- module(Helpers, [concatenate/2, getElementByIndex/3, stringToCharList/2, charListToString/2, unlines/2, lines/2, map/3, cycleChar/3]).
+:- module(Helpers, [concatenate/2, getElementByIndex/3, stringToCharList/2, charListToString/2, unlines/2, lines/2, map/3, cycleChar/3, splitAt/4]).
 
 concatenate([], '').
 concatenate([X], X).
@@ -27,8 +27,19 @@ map([X|Xs], Transformation, [Y|Ys]) :-
     call(Transformation, X, Y),
     map(Xs, Transformation, Ys).
 
-cycleChar(_, 0, Result) :- Result = "", !.
+cycleChar(_, 0.0, Result) :- Result = "", !.
 cycleChar(Char, Quantity, Result) :- 
-  QuantityDec is Quantity - 1,
+  QuantityDec is Quantity - 0.5,
   cycleChar(Char, QuantityDec, R2),
-  concatenate([Char, Char, R2], Result), !.
+  concatenate([Char, R2], Result), !.
+
+splitAt(List, Index, Before, After) :-
+  length(List, Length),
+  Length >= Index,
+  splitAtHelper(List, Index, Before, After).
+
+splitAtHelper(List, 0, [], List).
+splitAtHelper([X|Xs], Index, [X|Before], After) :-
+    Index > 0,
+    NextIndex is Index - 1,
+    splitAtHelper(Xs, NextIndex, Before, After).
