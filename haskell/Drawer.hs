@@ -43,7 +43,7 @@ drawTextScreen:: [String] -> [String]
 drawTextScreen texts = 
     [cycleChar "██" 98 ++ "\n"] ++
     getBorderSpacer "░░" ++
-    (flatten (map (\text -> makeTextLines ("(" ++ text ++ ")") ++ getBorderSpacer " " ++ getBorderSpacer " ") (drawTextScreenContent texts))) ++
+    (flatten (map (\text -> makeTextLines ("(" ++ text ++ ")") ++ getBorderSpacer " " ++ getBorderSpacer " ") (makeTextScreenContent texts))) ++
     getBorderSpacer "░░" ++
     getBorderSpacer "░░" ++
     [cycleChar "██" 98 ++ "\n"]
@@ -62,8 +62,8 @@ makeTextLines text =
     let sprites = map (\char -> getCharSprite char) (take 40 (text ++ cycle " "))
     in (concatLines (map (\sprite -> lines sprite) sprites) 0 " ")
 
-drawTextScreenContent :: [String] -> [String]
-drawTextScreenContent content = splitLines (handleBreakLines (unlines content) 0) 0
+makeTextScreenContent :: [String] -> [String]
+makeTextScreenContent content = splitLines (handleBreakLines (unlines content) 0) 0
 
 splitLines :: String -> Int -> [String]
 splitLines content 9 = []
