@@ -40,7 +40,7 @@ battle BattleState {playerColors, playerLife, playerEnergy, bossLife, bossEnergy
   let playerCards = if count == 5 then randomCards else aux
 
   clearScreen
-  mapM_ putStr (makeBattlefield playerColors (playerLife, playerEnergy) (bossLife, bossEnergy) boss playerCards currentCards)
+  mapM_ putStr (drawBattlefield playerColors (playerLife, playerEnergy) (bossLife, bossEnergy) boss playerCards currentCards)
 
   -- ESCOLHA
   -- CARTAS > 0 CUSTAM 20
@@ -70,17 +70,17 @@ battle BattleState {playerColors, playerLife, playerEnergy, bossLife, bossEnergy
 
   -- MOSTRA JOGADA DO PLAYER
   clearScreen
-  mapM_ putStr (makeBattlefield playerColors (playerLife, playerEnergyNew) (bossLife, bossEnergy) boss playerCardsZero [head currentCards, 0])
+  mapM_ putStr (drawBattlefield playerColors (playerLife, playerEnergyNew) (bossLife, bossEnergy) boss playerCardsZero [head currentCards, 0])
   delay
 
   -- MOSTRA JOGADA DO BOT
   clearScreen
-  mapM_ putStr (makeBattlefield playerColors (playerLife, playerEnergyNew) (bossLife, bossEnergyNew) boss playerCardsZero currentCards)
+  mapM_ putStr (drawBattlefield playerColors (playerLife, playerEnergyNew) (bossLife, bossEnergyNew) boss playerCardsZero currentCards)
   delay
 
   -- MOSTRA DANO
   clearScreen
-  mapM_ putStr (makeBattlefield playerColors (max 0 playerLifeNew, playerEnergyNew) (max 0 bossLifeNew, bossEnergyNew) boss playerCardsZero currentCards)
+  mapM_ putStr (drawBattlefield playerColors (max 0 playerLifeNew, playerEnergyNew) (max 0 bossLifeNew, bossEnergyNew) boss playerCardsZero currentCards)
   delay
   if bossLifeNew <= 0 || playerLifeNew <= 0
     then do
