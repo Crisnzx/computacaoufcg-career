@@ -1,4 +1,6 @@
 :- module(Helpers, [concatenate/2, getElementByIndex/3, stringToCharList/2, charListToString/2, unlines/2, lines/2, map/3, cycleChar/3, splitAt/4]).
+:- use_module('./Sprites.pl').
+:- use_module('./Drawer.pl').
 
 concatenate([], '').
 concatenate([X], X).

@@ -1,5 +1,5 @@
+:- module(Sprites, [getHealthBarSprite/3, getCharacterSprite/3, getCardSprite/2, getCharSprite/2]).
 :- use_module('./Helpers.pl').
-
 
 getHealthBarSprite(Life, Energy, Result) :-
   makeHealthBarValue(Life, LifeSprite),
