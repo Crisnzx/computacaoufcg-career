@@ -97,17 +97,19 @@ paintCharacter(CharacterSprite, [Head | Tail], CharIndex, Result) :-
     CharIndexInc is CharIndex + 1,
     paintCharacter(R2, Tail, CharIndexInc, Result).
 
-paintSpritePixels([], _, _, Result) :- Result = "", !.
-paintSpritePixels('', _, _, Result) :- Result = "", !.
 paintSpritePixels(Sprite, Color, Char, Result) :-
-    stringToCharList(Sprite, [Head | Tail]),
-    charListToString(TailString, Tail),
+  stringToCharList(Sprite, SpriteList),
+  privatePaintSpritePixels(SpriteList, Color, Char, Result).
+
+privatePaintSpritePixels([], _, _, Result) :- Result = "", !.
+privatePaintSpritePixels('', _, _, Result) :- Result = "", !.
+privatePaintSpritePixels([Head | Tail], Color, Char, Result) :-
     (atom_chars(Head, Char) -> (
         paintString(Color, "▓", R2),
-        paintSpritePixels(TailString, Color, Char, R3),
+        privatePaintSpritePixels(Tail, Color, Char, R3),
         concatenate([R2, R3], Result)
         ) 
-    ;   paintSpritePixels(TailString, Color, Char, R2),
+    ;   privatePaintSpritePixels(Tail, Color, Char, R2),
         concatenate([Head, R2], Result)
     ).
 
