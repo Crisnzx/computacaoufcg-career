@@ -7,7 +7,7 @@ drawBattlefield(PlayerColors, PlayerAttributes, BossAttributes, Boss, PlayerCard
   cycleChar("░", 22, HealthBarSpacer),
   cycleChar("░", 40, CharacterSpacer),
   makeHealthBarLines([PlayerAttributes, BossAttributes], HealthBarSpacer, HealthBarLines),
-  makeCharacterLines(["p1Boss", Boss], PlayerColors, CharacterSpacer, CharacterLines),
+  makeCharacterLines(["mainCharacter", Boss], PlayerColors, CharacterSpacer, CharacterLines),
   cycleChar("░", 98, Border),
   concatenate([Border, "\n"], FullBorder),
   cycleChar("█", 96, Line1),
