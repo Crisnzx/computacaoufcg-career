@@ -14,6 +14,10 @@ printStringList([Head|Tail]) :-
   write("\n"),
   printStringList(Tail).
 
+printTextScreen(Texts) :-
+  clearScreen,
+  drawTextScreen(Texts, TextScreen),
+  maplist(putStr, TextScreen).
 
 delay :-
     sleep(1).
