@@ -6,6 +6,11 @@
 :- use_module('./IOHelpers.pl').
 
 main :-
-  concatenate(['1', '2', '3'], Result),
-  write(Result).
-
+  battle(["red", "magenta", "green", "yellow", "blue"], [70, 20], [90, 50], 
+    "p1Boss", [1, 2, 3, 4, 5], [6, 7]),
+  battle(["red", "magenta", "green", "yellow", "blue"], [70, 20], [90, 50], 
+      "p2Boss", [1, 2, 3, 4, 5], [6, 7]),
+  battle(["red", "magenta", "green", "yellow", "blue"], [70, 20], [90, 50], 
+    "edaBoss", [1, 2, 3, 4, 5], [6, 7]),
+  battle(["red", "magenta", "green", "yellow", "blue"], [70, 20], [90, 50], 
+      "plpBoss", [1, 2, 3, 4, 5], [6, 7]).
