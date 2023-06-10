@@ -1,21 +1,41 @@
-:- module(Drawer, [concatLine/4, concatLines/4, mtlMapper/2]).
+:- module(Drawer, [concatLine/4, concatLines/4, textLinesMapper/2, healthBarSpriteMapper/2, characterSpriteMapper/3]).
 :- use_module('./Sprites.pl').
 :- use_module('./Helpers.pl').
 
 
-mtlMapper(Text, Result) :-
-  getBorderSpacer(" ", BlankLine),
-  concatenate(["(", Text, ")"], SpriteLine),
-  makeTextLines(SpriteLine, R2),
-  append(R2, BlankLine, R3),
-  append(R3, BlankLine, Result).
+makeHealthBarLines(HealthBars, Spacer, Result) :-
+  map(HealthBars, healthBarSpriteMapper, Sprites),
+  map(Sprites, lines, LineSprites),
+  concatLines(LineSprites, 0, Spacer, Result), !.
+
+healthBarSpriteMapper([Life|Energy], Result) :-
+  getHealthBarSprite(Life, Energy, Result).
+
+makeCharacterLines(Characters, ColorList, Spacer, Result) :-
+  map(Characters, characterSpriteMapper(ColorList), Sprites),
+  map(Sprites, lines, LineSprites),
+  concatLines(LineSprites, 0, Spacer, Result), !.
+
+characterSpriteMapper(ColorList, Character, Result) :-
+  getCharacterSprite(Character, ColorList, Result).
+
+
+makeCardLines(PlayerCards, CurrentCards, Spacer, Result) :-
+  append([-1], PlayerCards, R1),
+  append(R1, [-1], R2),
+  append(R2, CurrentCards, R3),
+  append(R3, [-1], Cards),
+  map(Cards, getCardSprite, Sprites),
+  map(Sprites, lines, LineSprites),
+  concatLines(LineSprites, 0, Spacer, Result), !.
+
 
 drawTextScreen(Texts, Result) :-
   cycleChar("█", 98, Border),
   concatenate([Border, "\n"], FullBorder),
   getBorderSpacer("░", Margin), 
   makeTextScreenContent(Texts, ScreenContent),
-  map(ScreenContent, mtlMapper, R),
+  map(ScreenContent, textLinesMapper, R),
   flatten(R, R1),
   append([FullBorder], Margin, R2),
   append(R2, R1, R3),
@@ -23,6 +43,12 @@ drawTextScreen(Texts, Result) :-
   append(R4, Margin, R5),
   append(R5, [FullBorder], Result), !.
 
+textLinesMapper(Text, Result) :-
+  getBorderSpacer(" ", BlankLine),
+  concatenate(["(", Text, ")"], SpriteLine),
+  makeTextLines(SpriteLine, R2),
+  append(R2, BlankLine, R3),
+  append(R3, BlankLine, Result).
 
 getBorderSpacer(Spacer, Result) :-
   cycleChar(Spacer, 93, CycledSpacer),

@@ -29,6 +29,7 @@ map([X|Xs], Transformation, [Y|Ys]) :-
     call(Transformation, X, Y),
     map(Xs, Transformation, Ys).
 
+cycleChar(_, 0, Result) :- Result = "", !.
 cycleChar(_, 0.0, Result) :- Result = "", !.
 cycleChar(Char, Quantity, Result) :- 
   QuantityDec is Quantity - 0.5,

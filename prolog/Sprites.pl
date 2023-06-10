@@ -32,14 +32,12 @@ prepareLifeValue(Life, Result) :-
   stringToCharList(R2, Result).
 
 makeHealthBarMeter(Life, Energy, Result) :-
-  LifeProportion is Life * 0.3,
-  round(LifeProportion, LifePixels),
+  LifePixels is floor(Life * 0.3),
   getHealthBarColor(Life, LifeColor),
   fillHealthBar(LifeColor, LifePixels, FilledLife),
   concatenate(["░░░░░░██", FilledLife, "██░░░░░░"], R1),
 
-  EnergyProportion is Energy * 0.2,
-  round(EnergyProportion, EnergyPixels),
+  EnergyPixels is floor(Energy * 0.2),
   fillEnergyBar(EnergyPixels, FilledEnergy),
   concatenate(["░░░░░░██", FilledEnergy, "██░░░░░░░░░░░░░░░░░░░░░░░░░░"], R2),
   
@@ -70,8 +68,8 @@ fillEnergyBar(Energy, Result) :-
   cycleChar("▓", Energy, FilledEnergy),
   Quantity is 20-Energy,
   cycleChar("░", Quantity, UnfilledEnergy),
-  concatenate([FilledEnergy, UnfilledEnergy], EnergyBarSprite),
-  paintString("blue", EnergyBarSprite, Result).
+  paintString("blue", FilledEnergy, R2),
+  concatenate([R2, UnfilledEnergy], Result).
 
 
 
@@ -169,7 +167,7 @@ getCharacterSprite("mainCharacter", ColorList, Result) :-
         "░░░░░░░░░░░░░░░░██bbbbbbbbbbbbbb██░░░░░░██bbbbbbbbbbbbbb██",
         "░░░░░░░░░░░░░░░░██████████████████░░░░░░██████████████████"
         ], Sprite),
-    paintCharacter(Sprite, ColorList, 0, Result).
+    paintCharacter(Sprite, ColorList, 0, Result), !.
 
 getCharacterSprite("admBoss", _, Result) :-
     unlines([
