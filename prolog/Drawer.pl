@@ -1,6 +1,33 @@
 :- module(Drawer, [concatLine/4, concatLines/4, textLinesMapper/2, healthBarSpriteMapper/2, characterSpriteMapper/3]).
 :- use_module('./Sprites.pl').
 :- use_module('./Helpers.pl').
+:- use_module('./IOHelpers.pl').
+
+drawBattlefield(PlayerColors, PlayerAttributes, BossAttributes, Boss, PlayerCards, CurrentCards, Result) :-
+  cycleChar("░", 22, HealthBarSpacer),
+  cycleChar("░", 40, CharacterSpacer),
+  makeHealthBarLines([PlayerAttributes, BossAttributes], HealthBarSpacer, HealthBarLines),
+  makeCharacterLines(["p1Boss", Boss], PlayerColors, CharacterSpacer, CharacterLines),
+  cycleChar("░", 98, Border),
+  concatenate([Border, "\n"], FullBorder),
+  cycleChar("█", 96, Line1),
+  concatenate(["░░", Line1, "░░", "\n"], ExternalLine),
+  cycleChar("░", 67, Line2),
+  cycleChar("░", 28, Line3),
+  concatenate(["██", Line2, "██", Line3, "██", "\n"], InternalLine),
+  makeCardLines(PlayerCards, CurrentCards, "░░░░", CardLines),
+  append([FullBorder], HealthBarLines, R1),
+  append(R1, [FullBorder], R2),
+  append(R2, CharacterLines, R3),
+  append(R3, [FullBorder], R4),
+  append(R4, [ExternalLine], R5),
+  append(R5, [InternalLine], R6),
+  append(R6, CardLines, R7),
+  append(R7, [InternalLine], R8),
+  append(R8, [ExternalLine], Result), !.
+
+
+
 
 
 makeHealthBarLines(HealthBars, Spacer, Result) :-
