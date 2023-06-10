@@ -1,3 +1,4 @@
+:- module(Drawer, [printStringList/1]).
 :- use_module('./Helpers.pl').
 
 clearScreen :-
@@ -11,7 +12,6 @@ onEnterContinue :-
 printStringList([]).
 printStringList([Head|Tail]) :-
   write(Head),
-  write("\n"),
   printStringList(Tail).
 
 printTextScreen(Texts) :-
