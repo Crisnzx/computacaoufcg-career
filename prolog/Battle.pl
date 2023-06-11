@@ -14,7 +14,7 @@ battle(PlayerColors, PlayerAttributes, BossAttributes, Boss, PlayerCards, Curren
     getElementByIndex(BossAttributes, 1, BossEnergy),
 
     drawBattlefield(PlayerColors, PlayerAttributes, BossAttributes, 
-        Boss, PlayerCards, CurrentCards, Result0), write(Result0),
+        Boss, PlayerCards, CurrentCards, Result0), clearScreen(), write(Result0),
 
     write("Escolha uma carta de 0-4\n"),
     read(PlayerNumber),
@@ -23,15 +23,20 @@ battle(PlayerColors, PlayerAttributes, BossAttributes, Boss, PlayerCards, Curren
 
     % Desenhando escolha
     drawBattlefield(PlayerColors, [PlayerLife, PlayerEnergy], [PlayerLife, PlayerEnergy], 
-    Boss, [1, 2, 3, 4, 5], [PlayerChoice, BossChoice], Result1), write(Result1).
+    Boss, [1, 2, 3, 4, 5], [PlayerChoice, BossChoice], Result1), 
+    clearScreen(), write(Result1),
+    delay(),
+
+    % Verificando energia suficiente TODO
+    
 
     % Definindo quem leva dano
     (PlayerChoice > BossChoice -> 
         BossLifeNew is BossLife - 10, PlayerLifeNew = PlayerLife;
         PlayerLifeNew is PlayerLife - 10, BossLifeNew = BossLife ),
 
-    % Desenhando Dano
-    drawBattlefield(PlayerColors, [PlayerLifeNew, 20], [BossLifeNew, 50], 
-        Boss, [1, 2, 3, 4, 5], [PlayerChoice, BossChoice], Result2), write(Result2),
-
-    battle(PlayerColors, [PlayerLifeNew, PlayerEnergy], [BossLifeNew, BossEnergy], Boss, PlayerCards, [0, 0], Difficulty).
+    % Continua batalha ou encerra
+    PlayerLifeNew > 0,
+    BossLifeNew > 0,
+    battle(PlayerColors, [PlayerLifeNew, PlayerEnergy], [BossLifeNew, BossEnergy], Boss, PlayerCards, [0, 0], Difficulty);
+    true.
