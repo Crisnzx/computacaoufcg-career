@@ -1,8 +1,8 @@
-:- module(Drawer, [printStringList/1]).
+:- module(Drawer, [clearScreen/0, printStringList/1, delay/0]).
 :- use_module('./Helpers.pl').
 
 clearScreen :-
-    system('clear').
+    shell('clear').
 
 onEnterContinue :-
   writeln(" \n=== Pressione enter para continuar. ==="),
