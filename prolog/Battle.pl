@@ -8,12 +8,12 @@ sortear_lista_aleatoria(Tamanho, ValorMaximo, ListaSorteada) :-
 
 sortear_lista_aleatoria(0, _, ListaSorteada, ListaSorteada) :- !.
 sortear_lista_aleatoria(Tamanho, ValorMaximo, ListaParcial, ListaSorteada) :-
-    random(1, ValorMaximo, NumeroSorteado),
+    random(0, ValorMaximo, NumeroSorteado),
     NovoTamanho is Tamanho - 1,
     sortear_lista_aleatoria(NovoTamanho, ValorMaximo, [NumeroSorteado|ListaParcial], ListaSorteada).
     
 battle(PlayerColors, PlayerAttributes, BossAttributes, Boss, Difficulty) :-
-    sortear_lista_aleatoria(5, 12, NewCards),
+    sortear_lista_aleatoria(5, 13, NewCards),
     battle(PlayerColors, PlayerAttributes, BossAttributes, Boss, NewCards, [0, 0], Difficulty).
 
 battle(PlayerColors, PlayerAttributes, BossAttributes, Boss, PlayerCards, CurrentCards, Difficulty) :-
@@ -31,8 +31,9 @@ battle(PlayerColors, PlayerAttributes, BossAttributes, Boss, PlayerCards, Curren
         Boss, PlayerCards, CurrentCards, Result0),
     printStringList(Result0),
 
-    write("Escolha uma carta de 0-4\n"),
-    read(PlayerNumber),
+    write("Escolha uma carta de 1-5\n"),
+    read(PlayerInput),
+    PlayerNumber is PlayerInput - 1,
     getElementByIndex(PlayerCards, PlayerNumber, PlayerChoice),
     random_between(D0, D1, BossChoice),
 
@@ -44,13 +45,14 @@ battle(PlayerColors, PlayerAttributes, BossAttributes, Boss, PlayerCards, Curren
     delay(),
 
     % Verificando energia suficiente
-    PlayerEnergyNew is PlayerEnergy,
-    BossEnergyNew is BossEnergy,
+    (PlayerChoice > 0, PlayerEnergy >= 15, PlayerEnergyNew is PlayerEnergy - 15; PlayerEnergyNew is PlayerEnergy + 25),
+    (BossChoice > 0, BossEnergy >= 15, BossEnergyNew is BossEnergy - 15; BossEnergyNew is 100),
 
     % Definindo quem leva dano
-    ((PlayerChoice > BossChoice, PlayerEnergy - 15 > -1, PlayerLifeNew is PlayerLife, BossLifeNew is BossLife - 10);
-    (PlayerChoice < BossChoice , BossEnergy - 15 > -1, BossLifeNew is BossLife, PlayerLifeNew is PlayerLife - 10);
-    (PlayerChoice = BossChoice, BossLifeNew is BossLife - 10, PlayerLifeNew is PlayerLife - 10)),
+    (( PlayerChoice > BossChoice, PlayerEnergy >= 15, PlayerLifeNew is PlayerLife, BossLifeNew is BossLife - 10);
+    (PlayerChoice < BossChoice , BossEnergy >= 15, BossLifeNew is BossLife, PlayerLifeNew is PlayerLife - 10);
+    (PlayerChoice = BossChoice, BossLifeNew is BossLife - 10, PlayerLifeNew is PlayerLife - 10);
+    ((PlayerEnergy < 15; BossEnergy < 15), PlayerLifeNew is PlayerLife, BossLifeNew is BossLife)),
 
     sortear_lista_aleatoria(5, 12, NewCards),
     % Continua batalha ou encerra
