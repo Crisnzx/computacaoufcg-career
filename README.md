@@ -22,6 +22,30 @@ cd haskell
 ./compile.sh
 ```
 
+## Prolog
+
+### Para executar o projeto em prolog:
+
+**O compilador SWI-PL é necessário para a execução do jogo.**
+
+- Entre na pasta `prolog`
+
+```
+cd prolog
+```
+
+- Execute o script shell
+
+```
+./compile.sh main
+```
+
+- Chame a função main, usando o comando
+
+```
+main.
+```
+
 ### Observações
 
 - Atualmente o jogo só funciona em sistemas Unix (Linux, MacOS)
