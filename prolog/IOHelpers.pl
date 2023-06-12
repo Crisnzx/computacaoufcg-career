@@ -3,7 +3,7 @@
 :- use_module('./Drawer.pl').
 
 clearScreen :-
-  tty_clear.
+  shell('clear').
 
 onEnterContinue :-
   writeln(" \n=== Pressione enter para continuar. ==="),
