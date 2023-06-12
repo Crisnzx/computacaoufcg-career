@@ -1,3 +1,4 @@
+:- module(Stories, [fubicaStory/0, daltonStory/0, gaudencioStory/0, jaStory/0, evertonStory/0, endGame/0]).
 :- use_module('./IOHelpers.pl').
 :- use_module('./Helpers.pl').
 :- use_module('./Sprites.pl').

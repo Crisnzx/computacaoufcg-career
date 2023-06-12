@@ -1,3 +1,4 @@
+:- module(Menu, [printMenu/0]).
 :- use_module('./Drawer.pl').
 :- use_module('./IOHelpers.pl').
 

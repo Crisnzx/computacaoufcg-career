@@ -6,13 +6,21 @@
 :- use_module('./IOHelpers.pl').
 
 main :-
-  battle(["red", "magenta", "green", "yellow", "blue"], [70, 10], [10, 100], 
+  printMenu(),
+  fubicaStory(),
+  battle(["red", "magenta", "green", "yellow", "blue"], [100,100], [100,100], 
     "admBoss", [1, 5]),
-  battle(["red", "magenta", "green", "yellow", "blue"], [70, 20], [90, 50], 
+  daltonStory(),
+  battle(["red", "magenta", "green", "yellow", "blue"], [100,100], [100,100], 
     "p1Boss", [3, 7]),
-  battle(["red", "magenta", "green", "yellow", "blue"], [70, 20], [90, 50], 
+  gaudencioStory(),
+  battle(["red", "magenta", "green", "yellow", "blue"], [100,100], [100,100], 
       "p2Boss", [3, 8]),
-  battle(["red", "magenta", "green", "yellow", "blue"], [70, 20], [90, 50], 
+  jaStory(),
+  battle(["red", "magenta", "green", "yellow", "blue"], [100,100], [100,100], 
     "edaBoss", [4, 10]),
-  battle(["red", "magenta", "green", "yellow", "blue"], [70, 20], [90, 50], 
-      "plpBoss", [6, 10]).
+  evertonStory(),
+  battle(["red", "magenta", "green", "yellow", "blue"], [100,100], [100,100], 
+      "plpBoss", [6, 10]),
+  endGame(),
+  main().

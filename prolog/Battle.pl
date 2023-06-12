@@ -40,10 +40,9 @@ battle(PlayerColors, PlayerAttributes, BossAttributes, Boss, PlayerCards, Curren
     write(Result1),
     delay(),
 
-
     % Verificando energia suficiente
-    (PlayerChoice > 0, PlayerEnergy - 15 > -1, PlayerEnergyNew is PlayerEnergy - 15; PlayerEnergyNew is PlayerEnergy + 25),
-    (BossChoice > 0, BossEnergy - 15 > -1, BossEnergyNew is BossEnergy - 15; BossEnergyNew is BossEnergy + 25),
+    PlayerEnergyNew is PlayerEnergy,
+    BossEnergyNew is BossEnergy,
 
     % Definindo quem leva dano
     ((PlayerChoice > BossChoice, PlayerEnergy - 15 > -1, PlayerLifeNew is PlayerLife, BossLifeNew is BossLife - 10);
