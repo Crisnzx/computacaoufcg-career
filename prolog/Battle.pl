@@ -8,15 +8,15 @@ sortear_lista_aleatoria(Tamanho, ValorMaximo, ListaSorteada) :-
 
 sortear_lista_aleatoria(0, _, ListaSorteada, ListaSorteada) :- !.
 sortear_lista_aleatoria(Tamanho, ValorMaximo, ListaParcial, ListaSorteada) :-
-    random(0, ValorMaximo, NumeroSorteado),
+    random(5, ValorMaximo, NumeroSorteado),
     NovoTamanho is Tamanho - 1,
     sortear_lista_aleatoria(NovoTamanho, ValorMaximo, [NumeroSorteado|ListaParcial], ListaSorteada).
     
 battle(PlayerColors, PlayerAttributes, BossAttributes, Boss, Difficulty) :-
     sortear_lista_aleatoria(5, 13, NewCards),
-    battle(PlayerColors, PlayerAttributes, BossAttributes, Boss, NewCards, [0, 0], Difficulty).
+    battle(PlayerColors, PlayerAttributes, BossAttributes, Boss, NewCards, [0, 0], Difficulty, 5).
 
-battle(PlayerColors, PlayerAttributes, BossAttributes, Boss, PlayerCards, CurrentCards, Difficulty) :-
+battle(PlayerColors, PlayerAttributes, BossAttributes, Boss, PlayerCards, CurrentCards, Difficulty, NCards) :-
     % Pegando Dificuldade
     getElementByIndex(Difficulty, 0, D0),
     getElementByIndex(Difficulty, 1, D1),
@@ -54,9 +54,14 @@ battle(PlayerColors, PlayerAttributes, BossAttributes, Boss, PlayerCards, Curren
     (PlayerChoice = BossChoice, BossLifeNew is BossLife - 10, PlayerLifeNew is PlayerLife - 10);
     ((PlayerEnergy < 15; BossEnergy < 15), PlayerLifeNew is PlayerLife, BossLifeNew is BossLife)),
 
-    sortear_lista_aleatoria(5, 12, NewCards),
+    % Zerando cartas
+    ((NCards = 5, sortear_lista_aleatoria(4, 12, RandomCards), append([RandomCards, [0]], NewCards), NewNCards is 4);
+      (NCards = 4, sortear_lista_aleatoria(3, 12, RandomCards), append([RandomCards, [0, 0]], NewCards), NewNCards is 3);
+      (NCards = 3, sortear_lista_aleatoria(5, 12, RandomCards), NewCards = RandomCards, NewNCards is 5)
+    ),
+
     % Continua batalha ou encerra
     PlayerLifeNew > 0,
     BossLifeNew > 0,
-    battle(PlayerColors, [PlayerLifeNew, PlayerEnergyNew], [BossLifeNew, BossEnergyNew], Boss, NewCards, [0, 0], Difficulty);
+    battle(PlayerColors, [PlayerLifeNew, PlayerEnergyNew], [BossLifeNew, BossEnergyNew], Boss, NewCards, [0, 0], Difficulty, NewNCards);
     true.
