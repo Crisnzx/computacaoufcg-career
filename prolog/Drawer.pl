@@ -86,7 +86,7 @@ makeTextLines(Text, Result) :-
   cycleChar(" ", 40, TrailingSpaces),
   concatenate([Text, TrailingSpaces], FullText),
   stringToCharList(FullText, FullTextList),
-  splitAt(FullTextList, 40, Line, _),
+  splitAt(FullTextList, 39, Line, _),
   map(Line, getCharSprite, Sprites),
   map(Sprites, lines, R2),
   concatLines(R2, 0, " ", Result), !.
@@ -118,7 +118,7 @@ privateHandleBreakLines([], _, Result) :-
 
 privateHandleBreakLines([Char|Tail], CharCount, Result) :-
   (Char = '\n' -> (
-    SpacesQuantity is (37 - (CharCount mod 37) // 2),
+    SpacesQuantity is ((37 - (CharCount mod 37)) / 2),
     cycleChar(" ", SpacesQuantity, R1),
     privateHandleBreakLines(Tail, 0, R2),
     concatenate([R1, R2], Result), !
