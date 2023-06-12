@@ -1,12 +1,13 @@
-:- module(Drawer, [printStringList/1]).
+:- module(IOHelpers, [printStringList/1, printTextScreen/1, clearScreen/0, onEnterContinue/0, delay/0]).
 :- use_module('./Helpers.pl').
+:- use_module('./Drawer.pl').
 
 clearScreen :-
-    system('clear').
+  tty_clear.
 
 onEnterContinue :-
   writeln(" \n=== Pressione enter para continuar. ==="),
-  read_line(_),
+  get_single_char(_),
   writeln("\n\n").
 
 printStringList([]).
@@ -17,7 +18,7 @@ printStringList([Head|Tail]) :-
 printTextScreen(Texts) :-
   clearScreen,
   drawTextScreen(Texts, TextScreen),
-  maplist(putStr, TextScreen).
+  maplist(write, TextScreen).
 
 delay :-
     sleep(1).

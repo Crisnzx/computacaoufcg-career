@@ -1,4 +1,4 @@
-:- module(Drawer, [concatLine/4, concatLines/4, textLinesMapper/2, healthBarSpriteMapper/2, characterSpriteMapper/3]).
+:- module(Drawer, [drawTextScreen/2, concatLine/4, concatLines/4, textLinesMapper/2, healthBarSpriteMapper/2, characterSpriteMapper/3]).
 :- use_module('./Sprites.pl').
 :- use_module('./Helpers.pl').
 :- use_module('./IOHelpers.pl').

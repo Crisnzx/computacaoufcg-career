@@ -3,7 +3,7 @@
 
 
 printMenu :-
-  printTextScreen(["", "====== computacao ufcg: career ======", "", "   1-iniciar o jogo", "   2-tutorial", "   3-sair"]),
+  printTextScreen([ "====== computacao ufcg: career ======", "1-iniciar o jogo", "2-tutorial", "3-sair"]),
   read(ChosenOption),
   onChosenOption(ChosenOption).
 
@@ -39,7 +39,7 @@ onChosenOption(InvalidOption) :-
     printMenu.
 
 startGame :-
-  printTextScreen(["", "", "", "      antes de iniciar o jogo", "", "      customize seu personagem"]),
+  printTextScreen(["       antes de iniciar o jogo", "", "      customize seu personagem"]),
   onEnterContinue.
 
 openTutorial :-
@@ -85,7 +85,7 @@ customizeCharacter(ColorList) :-
                    "6- azul           14- azul claro",
                    "7- magenta        15- magenta claro",
                    "8- ciano          16- ciano claro"]),
-  read_line(Line1),
+  read(Line1),
   number_codes(HairColor, Line1),
   printTextScreen(["escolha a cor da pele:",
                    "1- preto           9- branco",
@@ -96,7 +96,7 @@ customizeCharacter(ColorList) :-
                    "6- azul           14- azul claro",
                    "7- magenta        15- magenta claro",
                    "8- ciano          16- ciano claro"]),
-  read_line(Line2),
+  read(Line2),
   number_codes(SkinColor, Line2),
   printTextScreen(["escolha a cor da camisa:",
                    "1- preto           9- branco",
@@ -107,7 +107,7 @@ customizeCharacter(ColorList) :-
                    "6- azul           14- azul claro",
                    "7- magenta        15- magenta claro",
                    "8- ciano          16- ciano claro"]),
-  read_line(Line3),
+  read(Line3),
   number_codes(ShirtColor, Line3),
   printTextScreen(["escolha a cor do short:",
                    "1- preto           9- branco",
@@ -118,7 +118,7 @@ customizeCharacter(ColorList) :-
                    "6- azul           14- azul claro",
                    "7- magenta        15- magenta claro",
                    "8- ciano          16- ciano claro"]),
-  read_line(Line4),
+  read(Line4),
   number_codes(ShortsColor, Line4),
   printTextScreen(["escolha a cor do tenis:",
                    "1- preto           9- branco",
@@ -129,11 +129,11 @@ customizeCharacter(ColorList) :-
                    "6- azul           14- azul claro",
                    "7- magenta        15- magenta claro",
                    "8- ciano          16- ciano claro"]),
-  read_line(Line5),
+  read(Line5),
   number_codes(SneakersColor, Line5),
   ColorList = [HairColor, SkinColor, ShirtColor, ShortsColor, SneakersColor].
 
 onEnterGoBackToMenu :-
   writeln("\n=== Pressione enter para voltar para o menu inicial. ==="),
-  read_line(_),
+  get_single_char(_),
   printMenu.
