@@ -26,6 +26,7 @@ battle(PlayerColors, PlayerAttributes, BossAttributes, Boss, PlayerCards, Curren
     getElementByIndex(BossAttributes, 0, BossLife),
     getElementByIndex(BossAttributes, 1, BossEnergy),
 
+    clearScreen,
     drawBattlefield(PlayerColors, PlayerAttributes, BossAttributes, 
         Boss, PlayerCards, CurrentCards, Result0), write(Result0),
 
@@ -35,6 +36,7 @@ battle(PlayerColors, PlayerAttributes, BossAttributes, Boss, PlayerCards, Curren
     random_between(D0, D1, BossChoice),
 
     % Desenhando escolha
+    clearScreen,
     drawBattlefield(PlayerColors, PlayerAttributes, BossAttributes, 
     Boss, PlayerCards, [PlayerChoice, BossChoice], Result1), 
     write(Result1),
