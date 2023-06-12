@@ -28,7 +28,8 @@ battle(PlayerColors, PlayerAttributes, BossAttributes, Boss, PlayerCards, Curren
 
     clearScreen,
     drawBattlefield(PlayerColors, PlayerAttributes, BossAttributes, 
-        Boss, PlayerCards, CurrentCards, Result0), write(Result0),
+        Boss, PlayerCards, CurrentCards, Result0),
+    printStringList(Result0),
 
     write("Escolha uma carta de 0-4\n"),
     read(PlayerNumber),
@@ -39,7 +40,7 @@ battle(PlayerColors, PlayerAttributes, BossAttributes, Boss, PlayerCards, Curren
     clearScreen,
     drawBattlefield(PlayerColors, PlayerAttributes, BossAttributes, 
     Boss, PlayerCards, [PlayerChoice, BossChoice], Result1), 
-    write(Result1),
+    printStringList(Result1),
     delay(),
 
     % Verificando energia suficiente
