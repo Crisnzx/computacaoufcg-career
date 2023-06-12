@@ -9,7 +9,7 @@ main :-
   printMenu(),
   customizeCharacter(CustomColors),
   fubicaStory(),
-  battle(CustomColors, [5,5], [100,100],
+  battle(CustomColors, [100,100], [100,100],
     "admBoss", [1, 5]),
   daltonStory(),
   battle(CustomColors, [100,100], [100,100],
