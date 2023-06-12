@@ -5,7 +5,7 @@
 
 
 printMenu :-
-  printTextScreen([ "====== computacao ufcg: career ======", "1-iniciar o jogo", "2-tutorial", "3-sair"]),
+  printTextScreen(["", "====== computacao ufcg: career ======", "", "   1-iniciar o jogo", "   2-tutorial", "   3-sair"]),
   read(ChosenOption),
   onChosenOption(ChosenOption).
 
