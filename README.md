@@ -1,5 +1,12 @@
 # computacaoufcg-career
 
+## Demo do jogo
+
+https://www.youtube.com/watch?v=oQm3ZIBQBPs&t=4s
+
+![image](https://github.com/cristovao-n/computacaoufcg-career/assets/54537252/25eee9f2-adf0-49f7-8a0a-f1f051ba5147)
+
+
 ## Haskell
 
 ### Para executar o projeto em haskell:
