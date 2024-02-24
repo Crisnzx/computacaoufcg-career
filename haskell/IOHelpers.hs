@@ -1,4 +1,4 @@
-module IOHelpers (clearScreen, onEnterContinue, printTextScreen, delay) where
+module IOHelpers (clearScreen, onEnterContinue, printTextScreen, printBattlefield, delay) where
 
 import Control.Concurrent (threadDelay)
 import Drawer
@@ -11,6 +11,19 @@ printTextScreen :: [String] -> IO ()
 printTextScreen texts = do
   clearScreen
   mapM_ putStr (drawTextScreen texts)
+
+printBattlefield ::
+  [String] ->
+  (Int, Int) ->
+  (Int, Int) ->
+  String ->
+  [Int] ->
+  [Int] ->
+  IO ()
+printBattlefield playerColors (playerLife, playerEnergy) (bossLife, bossEnergy) boss playerCards currentCards = do
+  let battlefield = drawBattlefield playerColors (playerLife, playerEnergy) (bossLife, bossEnergy) boss playerCards currentCards
+  clearScreen
+  mapM_ putStr battlefield
 
 onEnterContinue :: IO ()
 onEnterContinue = do

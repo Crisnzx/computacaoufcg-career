@@ -39,8 +39,7 @@ battle BattleState {playerColors, playerLife, playerEnergy, bossLife, bossEnergy
   randomCards <- sequence [(return 5) | _ <- playerCards]
   let playerCards = if count == 5 then randomCards else aux
 
-  clearScreen
-  mapM_ putStr (drawBattlefield playerColors (playerLife, playerEnergy) (bossLife, bossEnergy) boss playerCards currentCards)
+  printBattlefield playerColors (playerLife, playerEnergy) (bossLife, bossEnergy) boss playerCards currentCards
 
   -- ESCOLHA
   -- CARTAS > 0 CUSTAM 20
@@ -69,18 +68,15 @@ battle BattleState {playerColors, playerLife, playerEnergy, bossLife, bossEnergy
   let bossEnergyNew = if currentCards !! 1 == 0 then 100 else bossEnergy - 20
 
   -- MOSTRA JOGADA DO PLAYER
-  clearScreen
-  mapM_ putStr (drawBattlefield playerColors (playerLife, playerEnergyNew) (bossLife, bossEnergy) boss playerCardsZero [head currentCards, 0])
+  printBattlefield playerColors (playerLife, playerEnergyNew) (bossLife, bossEnergy) boss playerCardsZero [head currentCards, 0]
   delay
 
   -- MOSTRA JOGADA DO BOT
-  clearScreen
-  mapM_ putStr (drawBattlefield playerColors (playerLife, playerEnergyNew) (bossLife, bossEnergyNew) boss playerCardsZero currentCards)
+  printBattlefield playerColors (playerLife, playerEnergyNew) (bossLife, bossEnergyNew) boss playerCardsZero currentCards
   delay
 
   -- MOSTRA DANO
-  clearScreen
-  mapM_ putStr (drawBattlefield playerColors (max 0 playerLifeNew, playerEnergyNew) (max 0 bossLifeNew, bossEnergyNew) boss playerCardsZero currentCards)
+  printBattlefield playerColors (max 0 playerLifeNew, playerEnergyNew) (max 0 bossLifeNew, bossEnergyNew) boss playerCardsZero currentCards
   delay
   if bossLifeNew <= 0 || playerLifeNew <= 0
     then do
