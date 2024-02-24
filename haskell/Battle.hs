@@ -36,6 +36,7 @@ battle BattleState {playerColors, playerLife, playerEnergy, bossLife, bossEnergy
   -- SORTEANDO CARTAS NO INICIO DA PARTIDA CARTAS ZERADAS = 5
   let count = length [x | x <- playerCards, x == 0]
   let aux = playerCards
+  -- randomCards <- sequence [randomRIO (3, 13) | _ <- playerCards]
   randomCards <- sequence [(return 5) | _ <- playerCards]
   let playerCards = if count == 5 then randomCards else aux
 
@@ -47,12 +48,14 @@ battle BattleState {playerColors, playerLife, playerEnergy, bossLife, bossEnergy
   -- DIFICULDADE É O RANGE DO NÚMERO RANDOM
   printf "Escolha uma carta de 1-%d\n" (length playerCards)
   choice <- getPlayerChoice playerEnergy
+  -- bossChoice <- randomRIO difficulty
   bossChoice <- return 5
   let currentCards = [if playerEnergy < 20 then 0 else playerCards !! (choice - 1), if bossEnergy < 20 then 0 else bossChoice]
 
   -- REMOVENDO CARTA DO DECK (ZERANDO A CARTA) E PEGANDO DUAS CARTAS caso forem duas zerada
   -- também pode descansar com uma zerada
   let playerCardsZero = [if i == (choice - 1) then 0 else x | (x, i) <- zip playerCards [0 ..]]
+  -- randomNumber <- randomRIO (2, 12)
   randomNumber <- return 5
   let count = length [x | x <- playerCardsZero, x == 0]
   let playerCardsNew = [if x == 0 && count > 1 then randomNumber else x | x <- playerCardsZero]
